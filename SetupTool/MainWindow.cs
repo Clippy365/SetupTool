@@ -61,6 +61,10 @@ namespace SetupTool
             Hashtable ht = readApplicationList();
         }
 
+        // 
+        // Summary:
+        //      Reads out the file "applicationList.json"
+
         private Hashtable readApplicationList()
         {
             string applicationList = "applicationList.json";
@@ -76,6 +80,13 @@ namespace SetupTool
             return null;
         }
 
+        // 
+        // Summary:
+        //      Creates the file "applicationList.json" or overwrites an existing one
+        // 
+        // Parameters:
+        //      ht:
+        //          The Hashtable object that will be written to "applicationList.json"
         private void writeApplicationList(Hashtable ht)
         {
             string applicationList = "applicationList.json";
@@ -97,8 +108,6 @@ namespace SetupTool
             }
         }
 
-        // Summary:
-        //      Deletes selected items in "checkedListBoxApps" from "applicationList.json"
         private void ButtonDeletePackage_Click(object sender, EventArgs e)
         {
             string[] itemsToDelete = checkedListBoxApps.CheckedItems.Cast<string>().ToArray();
