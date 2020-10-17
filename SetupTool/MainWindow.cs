@@ -13,8 +13,9 @@ using Newtonsoft.Json;
 using System.Windows.Forms.Layout;
 using System.Collections;
 
+using static System.Windows.Forms.ListBox;
 
-namespace PepperPrepper
+namespace SetupTool
 {
     public partial class MainWindow : Form
     {
@@ -57,7 +58,7 @@ namespace PepperPrepper
         {
             AddPackage addp = new AddPackage();
             addp.ShowDialog();
-            readApplicationList();
+            Hashtable ht = readApplicationList();
         }
 
         private Hashtable readApplicationList()
@@ -75,12 +76,45 @@ namespace PepperPrepper
             return null;
         }
 
+        private void writeApplicationList(Hashtable ht)
+        {
+            string applicationList = "applicationList.json";
+            string fullPath = System.IO.Directory.GetCurrentDirectory() + "\\" + applicationList;
+
+            FileInfo fi = new FileInfo(applicationList);
+            if (fi.Exists)
+            {
+                try
+                {
+                    string json = JsonConvert.SerializeObject(ht);
+                    System.IO.File.WriteAllText(fullPath, json);
+                }
+
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message.ToString());
+                }
+            }
+        }
+
+        // Summary:
+        //      Deletes selected items in "checkedListBoxApps" from "applicationList.json"
         private void ButtonDeletePackage_Click(object sender, EventArgs e)
         {
-            checkedListBoxApps.Items.Remove(checkedListBoxApps.SelectedItem);
-            Hashtable list = readApplicationList();
+            string[] itemsToDelete = checkedListBoxApps.CheckedItems.Cast<string>().ToArray();
+            
 
-            //TODO delete selected items from JSON file
+            
+            if (itemsToDelete != null)
+            {
+                Hashtable list = readApplicationList();
+                foreach (string str in itemsToDelete)
+                {
+                    list.Remove(str);
+                    checkedListBoxApps.Items.Remove(str);
+                }
+                writeApplicationList(list);
+            }
         }
     }
 }

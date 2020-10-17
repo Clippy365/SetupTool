@@ -1,4 +1,4 @@
-﻿namespace PepperPrepper
+﻿namespace SetupTool
 {
     partial class AddPackage
     {

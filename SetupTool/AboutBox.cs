@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PepperPrepper
+namespace SetupTool
 {
     partial class AboutBox : Form
     {

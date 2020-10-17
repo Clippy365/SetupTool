@@ -12,7 +12,7 @@ using System.IO;
 using Newtonsoft.Json;
 using System.Collections;
 
-namespace PepperPrepper
+namespace SetupTool
 {
     public partial class AddPackage : Form
     {
