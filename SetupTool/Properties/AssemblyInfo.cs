@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("PepperPrepper")]
-[assembly: AssemblyDescription("Setup your environment properly! Install software packages and change important settings with PepperPrepper")]
+[assembly: AssemblyDescription("Setup your environment properly! Install software packages and change important settings with this tool!")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("PepperPrepper")]
