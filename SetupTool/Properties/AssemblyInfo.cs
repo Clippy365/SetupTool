@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("PepperPrepper")]
+[assembly: AssemblyTitle("SetupTool")]
 [assembly: AssemblyDescription("Setup your environment properly! Install software packages and change important settings with this tool!")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("PepperPrepper")]
+[assembly: AssemblyProduct("SetupTool")]
 [assembly: AssemblyCopyright("Copyright © 2020 Timo Vogel")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
