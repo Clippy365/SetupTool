@@ -54,17 +54,19 @@
             // 
             this.checkedListBoxApps.CheckOnClick = true;
             this.checkedListBoxApps.FormattingEnabled = true;
-            this.checkedListBoxApps.Location = new System.Drawing.Point(6, 19);
+            this.checkedListBoxApps.Location = new System.Drawing.Point(8, 23);
+            this.checkedListBoxApps.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.checkedListBoxApps.Name = "checkedListBoxApps";
-            this.checkedListBoxApps.Size = new System.Drawing.Size(363, 274);
+            this.checkedListBoxApps.Size = new System.Drawing.Size(483, 327);
             this.checkedListBoxApps.Sorted = true;
             this.checkedListBoxApps.TabIndex = 0;
             // 
             // buttonStart
             // 
-            this.buttonStart.Location = new System.Drawing.Point(336, 379);
+            this.buttonStart.Location = new System.Drawing.Point(448, 466);
+            this.buttonStart.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonStart.Name = "buttonStart";
-            this.buttonStart.Size = new System.Drawing.Size(100, 41);
+            this.buttonStart.Size = new System.Drawing.Size(133, 50);
             this.buttonStart.TabIndex = 1;
             this.buttonStart.Text = "Start";
             this.buttonStart.UseVisualStyleBackColor = true;
@@ -73,9 +75,11 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.checkedListBoxApps);
-            this.groupBox1.Location = new System.Drawing.Point(8, 27);
+            this.groupBox1.Location = new System.Drawing.Point(11, 33);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(375, 300);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Size = new System.Drawing.Size(500, 369);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Software";
@@ -83,9 +87,11 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.checkedListBoxSettings);
-            this.groupBox2.Location = new System.Drawing.Point(389, 27);
+            this.groupBox2.Location = new System.Drawing.Point(519, 33);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(375, 300);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Size = new System.Drawing.Size(500, 369);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Settings";
@@ -93,19 +99,21 @@
             // checkedListBoxSettings
             // 
             this.checkedListBoxSettings.FormattingEnabled = true;
-            this.checkedListBoxSettings.Location = new System.Drawing.Point(6, 19);
+            this.checkedListBoxSettings.Location = new System.Drawing.Point(8, 23);
+            this.checkedListBoxSettings.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.checkedListBoxSettings.Name = "checkedListBoxSettings";
-            this.checkedListBoxSettings.Size = new System.Drawing.Size(363, 274);
+            this.checkedListBoxSettings.Size = new System.Drawing.Size(483, 327);
             this.checkedListBoxSettings.TabIndex = 0;
             // 
             // menuStrip1
             // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(770, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1027, 28);
             this.menuStrip1.TabIndex = 5;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -115,19 +123,19 @@
             this.optionsToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
             this.optionsToolStripMenuItem.Text = "Options";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
@@ -136,21 +144,22 @@
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(133, 26);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
             // buttonDeletePackage
             // 
-            this.buttonDeletePackage.Location = new System.Drawing.Point(95, 333);
+            this.buttonDeletePackage.Location = new System.Drawing.Point(127, 410);
+            this.buttonDeletePackage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonDeletePackage.Name = "buttonDeletePackage";
-            this.buttonDeletePackage.Size = new System.Drawing.Size(75, 23);
+            this.buttonDeletePackage.Size = new System.Drawing.Size(100, 28);
             this.buttonDeletePackage.TabIndex = 6;
             this.buttonDeletePackage.Text = "Delete";
             this.buttonDeletePackage.UseVisualStyleBackColor = true;
@@ -158,9 +167,10 @@
             // 
             // buttonAddPackage
             // 
-            this.buttonAddPackage.Location = new System.Drawing.Point(14, 333);
+            this.buttonAddPackage.Location = new System.Drawing.Point(19, 410);
+            this.buttonAddPackage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonAddPackage.Name = "buttonAddPackage";
-            this.buttonAddPackage.Size = new System.Drawing.Size(75, 23);
+            this.buttonAddPackage.Size = new System.Drawing.Size(100, 28);
             this.buttonAddPackage.TabIndex = 7;
             this.buttonAddPackage.Text = "Add";
             this.buttonAddPackage.UseVisualStyleBackColor = true;
@@ -168,9 +178,10 @@
             // 
             // buttonUncheckAllSoftware
             // 
-            this.buttonUncheckAllSoftware.Location = new System.Drawing.Point(308, 333);
+            this.buttonUncheckAllSoftware.Location = new System.Drawing.Point(411, 410);
+            this.buttonUncheckAllSoftware.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonUncheckAllSoftware.Name = "buttonUncheckAllSoftware";
-            this.buttonUncheckAllSoftware.Size = new System.Drawing.Size(75, 23);
+            this.buttonUncheckAllSoftware.Size = new System.Drawing.Size(100, 28);
             this.buttonUncheckAllSoftware.TabIndex = 8;
             this.buttonUncheckAllSoftware.Text = "Uncheck all";
             this.buttonUncheckAllSoftware.UseVisualStyleBackColor = true;
@@ -178,9 +189,11 @@
             // 
             // buttonCheckRecommendedSoftware
             // 
-            this.buttonCheckRecommendedSoftware.Location = new System.Drawing.Point(176, 333);
+            this.buttonCheckRecommendedSoftware.Enabled = false;
+            this.buttonCheckRecommendedSoftware.Location = new System.Drawing.Point(235, 410);
+            this.buttonCheckRecommendedSoftware.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonCheckRecommendedSoftware.Name = "buttonCheckRecommendedSoftware";
-            this.buttonCheckRecommendedSoftware.Size = new System.Drawing.Size(126, 23);
+            this.buttonCheckRecommendedSoftware.Size = new System.Drawing.Size(168, 28);
             this.buttonCheckRecommendedSoftware.TabIndex = 9;
             this.buttonCheckRecommendedSoftware.Text = "Check recommended";
             this.buttonCheckRecommendedSoftware.UseVisualStyleBackColor = true;
@@ -188,9 +201,11 @@
             // 
             // buttonCheckRecommendedSettings
             // 
-            this.buttonCheckRecommendedSettings.Location = new System.Drawing.Point(557, 333);
+            this.buttonCheckRecommendedSettings.Enabled = false;
+            this.buttonCheckRecommendedSettings.Location = new System.Drawing.Point(743, 410);
+            this.buttonCheckRecommendedSettings.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonCheckRecommendedSettings.Name = "buttonCheckRecommendedSettings";
-            this.buttonCheckRecommendedSettings.Size = new System.Drawing.Size(126, 23);
+            this.buttonCheckRecommendedSettings.Size = new System.Drawing.Size(168, 28);
             this.buttonCheckRecommendedSettings.TabIndex = 11;
             this.buttonCheckRecommendedSettings.Text = "Check recommended";
             this.buttonCheckRecommendedSettings.UseVisualStyleBackColor = true;
@@ -198,9 +213,10 @@
             // 
             // buttonUncheckAllSettings
             // 
-            this.buttonUncheckAllSettings.Location = new System.Drawing.Point(689, 333);
+            this.buttonUncheckAllSettings.Location = new System.Drawing.Point(919, 410);
+            this.buttonUncheckAllSettings.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonUncheckAllSettings.Name = "buttonUncheckAllSettings";
-            this.buttonUncheckAllSettings.Size = new System.Drawing.Size(75, 23);
+            this.buttonUncheckAllSettings.Size = new System.Drawing.Size(100, 28);
             this.buttonUncheckAllSettings.TabIndex = 10;
             this.buttonUncheckAllSettings.Text = "Uncheck all";
             this.buttonUncheckAllSettings.UseVisualStyleBackColor = true;
@@ -208,9 +224,9 @@
             // 
             // MainWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(770, 432);
+            this.ClientSize = new System.Drawing.Size(1027, 532);
             this.Controls.Add(this.buttonCheckRecommendedSettings);
             this.Controls.Add(this.buttonUncheckAllSettings);
             this.Controls.Add(this.buttonCheckRecommendedSoftware);
@@ -222,6 +238,7 @@
             this.Controls.Add(this.buttonStart);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "MainWindow";
             this.Text = "SetupTool";
             this.Load += new System.EventHandler(this.Form1_Load);

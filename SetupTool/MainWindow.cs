@@ -37,9 +37,13 @@ namespace SetupTool
         private void Form1_Load(object sender, EventArgs e)
         {
             Hashtable list = readApplicationList();
-            foreach (DictionaryEntry de in list)
+
+            if (list != null)
             {
-                checkedListBoxApps.Items.Add(de.Key.ToString());
+                foreach (DictionaryEntry de in list)
+                {
+                    checkedListBoxApps.Items.Add(de.Key.ToString());
+                }
             }
         }
 
@@ -111,9 +115,7 @@ namespace SetupTool
         private void ButtonDeletePackage_Click(object sender, EventArgs e)
         {
             string[] itemsToDelete = checkedListBoxApps.CheckedItems.Cast<string>().ToArray();
-            
-
-            
+                                   
             if (itemsToDelete != null)
             {
                 Hashtable list = readApplicationList();
