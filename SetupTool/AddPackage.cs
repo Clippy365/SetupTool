@@ -21,28 +21,36 @@ namespace SetupTool
             InitializeComponent();
         }
 
+        public string displayName { get { return textBox_displayName.Text; } }
+        public string packageName { get { return textBox_packageName.Text; } }
+
         private void Button_OK_Click(object sender, EventArgs e)
         {
-            string applicationList = "applicationList.json";
-            string fullPath = System.IO.Directory.GetCurrentDirectory() + "\\" + applicationList;
-            FileInfo fi = new FileInfo(applicationList);
-            if (fi.Exists)
+            if (textBox_displayName.Text != null && textBox_packageName != null)
             {
-                Hashtable list = JsonConvert.DeserializeObject<Hashtable>(File.ReadAllText(fullPath));
-                list.Add(textBox_displayName.Text, textBox_packageName.Text);
-                var newJsonObject = JsonConvert.SerializeObject(list, Formatting.Indented);
-                System.IO.File.WriteAllText(@fullPath, newJsonObject);
-                this.Close();
-            }
+                string applicationList = "applicationList.json";
+                string fullPath = System.IO.Directory.GetCurrentDirectory() + "\\" + applicationList;
+                FileInfo fi = new FileInfo(applicationList);
+                if (fi.Exists)
+                {
+                    Hashtable list = JsonConvert.DeserializeObject<Hashtable>(File.ReadAllText(fullPath));
+                    list.Add(textBox_displayName.Text, textBox_packageName.Text);
+                    var newJsonObject = JsonConvert.SerializeObject(list, Formatting.Indented);
+                    System.IO.File.WriteAllText(@fullPath, newJsonObject);
+                    this.Close();
+                }
 
-            else
-            {
-                Hashtable list = new Hashtable();
-                list.Add(textBox_displayName.Text, textBox_packageName.Text);
-                var JsonObject = JsonConvert.SerializeObject(list, Formatting.Indented);
-                System.IO.File.WriteAllText(@fullPath, JsonObject);
-                this.Close();
+                else
+                {
+                    Hashtable list = new Hashtable();
+                    list.Add(textBox_displayName.Text, textBox_packageName.Text);
+                    var JsonObject = JsonConvert.SerializeObject(list, Formatting.Indented);
+                    System.IO.File.WriteAllText(@fullPath, JsonObject);
+                    this.Close();
+                }
             }
+            else
+                MessageBox.Show("Please fill out both text boxes");
         }
 
         private void Button_Cancel_Click(object sender, EventArgs e)

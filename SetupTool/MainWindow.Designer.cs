@@ -52,6 +52,7 @@
             // 
             // checkedListBoxApps
             // 
+            this.checkedListBoxApps.CheckOnClick = true;
             this.checkedListBoxApps.FormattingEnabled = true;
             this.checkedListBoxApps.Location = new System.Drawing.Point(6, 19);
             this.checkedListBoxApps.Name = "checkedListBoxApps";
@@ -173,6 +174,7 @@
             this.buttonUncheckAllSoftware.TabIndex = 8;
             this.buttonUncheckAllSoftware.Text = "Uncheck all";
             this.buttonUncheckAllSoftware.UseVisualStyleBackColor = true;
+            this.buttonUncheckAllSoftware.Click += new System.EventHandler(this.buttonUncheckAllSoftware_Click);
             // 
             // buttonCheckRecommendedSoftware
             // 
@@ -182,6 +184,7 @@
             this.buttonCheckRecommendedSoftware.TabIndex = 9;
             this.buttonCheckRecommendedSoftware.Text = "Check recommended";
             this.buttonCheckRecommendedSoftware.UseVisualStyleBackColor = true;
+            this.buttonCheckRecommendedSoftware.Click += new System.EventHandler(this.buttonCheckRecommendedSoftware_Click);
             // 
             // buttonCheckRecommendedSettings
             // 
@@ -191,6 +194,7 @@
             this.buttonCheckRecommendedSettings.TabIndex = 11;
             this.buttonCheckRecommendedSettings.Text = "Check recommended";
             this.buttonCheckRecommendedSettings.UseVisualStyleBackColor = true;
+            this.buttonCheckRecommendedSettings.Click += new System.EventHandler(this.buttonCheckRecommendedSettings_Click);
             // 
             // buttonUncheckAllSettings
             // 
@@ -200,6 +204,7 @@
             this.buttonUncheckAllSettings.TabIndex = 10;
             this.buttonUncheckAllSettings.Text = "Uncheck all";
             this.buttonUncheckAllSettings.UseVisualStyleBackColor = true;
+            this.buttonUncheckAllSettings.Click += new System.EventHandler(this.buttonUncheckAllSettings_Click);
             // 
             // MainWindow
             // 

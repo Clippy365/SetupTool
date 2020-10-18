@@ -58,7 +58,7 @@ namespace SetupTool
         {
             AddPackage addp = new AddPackage();
             addp.ShowDialog();
-            Hashtable ht = readApplicationList();
+            checkedListBoxApps.Items.Add(addp.displayName);
         }
 
         // 
@@ -97,7 +97,7 @@ namespace SetupTool
             {
                 try
                 {
-                    string json = JsonConvert.SerializeObject(ht);
+                    string json = JsonConvert.SerializeObject(ht, Formatting.Indented);
                     System.IO.File.WriteAllText(fullPath, json);
                 }
 
@@ -124,6 +124,28 @@ namespace SetupTool
                 }
                 writeApplicationList(list);
             }
+        }
+
+        private void buttonCheckRecommendedSoftware_Click(object sender, EventArgs e)
+        {
+            //Currently not used
+        }
+
+        private void buttonUncheckAllSoftware_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < checkedListBoxApps.Items.Count; i++)
+                checkedListBoxApps.SetItemCheckState(i, CheckState.Unchecked);
+        }
+
+        private void buttonCheckRecommendedSettings_Click(object sender, EventArgs e)
+        {
+            //Currently not used
+        }
+
+        private void buttonUncheckAllSettings_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < checkedListBoxSettings.Items.Count; i++)
+                checkedListBoxSettings.SetItemCheckState(i, CheckState.Unchecked);
         }
     }
 }
