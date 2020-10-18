@@ -12,6 +12,7 @@ using System.IO;
 using Newtonsoft.Json;
 using System.Windows.Forms.Layout;
 using System.Collections;
+using System.Diagnostics;
 
 using static System.Windows.Forms.ListBox;
 
@@ -26,7 +27,7 @@ namespace SetupTool
 
         private void Start_btn_Click(object sender, EventArgs e)
         {
-
+            installPackages();
         }
 
         private void Exit_btn_Click(object sender, EventArgs e)
@@ -148,6 +149,42 @@ namespace SetupTool
         {
             for (int i = 0; i < checkedListBoxSettings.Items.Count; i++)
                 checkedListBoxSettings.SetItemCheckState(i, CheckState.Unchecked);
+        }
+
+        // 
+        // Summary:
+        //      Installs all packages, that have been checked in "checkedListBoxApps"
+        private void installPackages()
+        {
+            Hashtable htPackages = readApplicationList();
+            //TODO read only checked elements not whole json file
+            string[] packages = htPackages.Values.Cast<string>().ToArray();
+            
+            //TODO test if function still works if no element is checked
+            if (packages == null)
+                return;
+
+            string chocolateyCommand = "";
+            foreach (string str in packages)
+                chocolateyCommand += str + " ";
+
+            chocolateyCommand = "choco install " + packages + "-y";
+
+
+            //TODO: Check if Windows Terminal is installed. Use it if so
+            Process shell = new Process();
+            shell.StartInfo.FileName = "powershell.exe";
+            shell.StartInfo.RedirectStandardInput = true;
+            shell.StartInfo.RedirectStandardOutput = true;
+            shell.StartInfo.CreateNoWindow = true;
+            shell.StartInfo.UseShellExecute = false;
+            shell.Start();
+
+            shell.StandardInput.WriteLine(chocolateyCommand);
+            shell.StandardInput.Flush();
+            shell.StandardInput.Close();
+            shell.WaitForExit();
+            string ret = shell.StandardOutput.ReadToEnd();
         }
     }
 }
