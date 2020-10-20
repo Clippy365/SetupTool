@@ -63,7 +63,8 @@ namespace SetupTool
         {
             AddPackage addp = new AddPackage();
             addp.ShowDialog();
-            checkedListBoxApps.Items.Add(addp.displayName);
+            if(addp.displayName != "" && addp.packageName != "")
+                checkedListBoxApps.Items.Add(addp.displayName);
         }
 
         /// <summary>

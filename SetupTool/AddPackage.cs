@@ -26,7 +26,7 @@ namespace SetupTool
 
         private void Button_OK_Click(object sender, EventArgs e)
         {
-            if (textBox_displayName.Text != null && textBox_packageName != null)
+            if (textBox_displayName.Text != "" && textBox_packageName.Text != "")
             {
                 string applicationList = "applicationList.json";
                 string fullPath = System.IO.Directory.GetCurrentDirectory() + "\\" + applicationList;
@@ -55,6 +55,8 @@ namespace SetupTool
 
         private void Button_Cancel_Click(object sender, EventArgs e)
         {
+            textBox_displayName.Text = "";
+            textBox_packageName.Text = "";
             this.Close();
         }
     }
