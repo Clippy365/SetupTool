@@ -66,9 +66,10 @@ namespace SetupTool
             checkedListBoxApps.Items.Add(addp.displayName);
         }
 
-        // 
-        // Summary:
-        //      Reads out the file "applicationList.json"
+        /// <summary>
+        /// Reads out the file "applicationList.json"
+        /// </summary>
+        /// <returns>An hashtable object with all key/value pairs inside "applicationlist.json"</returns>
 
         private Hashtable readApplicationList()
         {
@@ -85,13 +86,11 @@ namespace SetupTool
             return null;
         }
 
-        // 
-        // Summary:
-        //      Creates the file "applicationList.json" or overwrites an existing one
-        // 
-        // Parameters:
-        //      ht:
-        //          The Hashtable object that will be written to "applicationList.json"
+        
+        /// <summary>
+        /// Creates the file "applicationList.json" or overwrites an existing one
+        /// </summary>
+        /// <param name="ht">The Hashtable object that will be written to "applicationList.json"</param>
         private void writeApplicationList(Hashtable ht)
         {
             string applicationList = "applicationList.json";
@@ -151,24 +150,29 @@ namespace SetupTool
                 checkedListBoxSettings.SetItemCheckState(i, CheckState.Unchecked);
         }
 
-        // 
-        // Summary:
-        //      Installs all packages, that have been checked in "checkedListBoxApps"
+        
+        /// <summary>
+        /// Installs all packages, that have been checked in "checkedListBoxApps"
+        /// </summary>
         private void installPackages()
         {
-            Hashtable htPackages = readApplicationList();
-            //TODO read only checked elements not whole json file
-            string[] packages = htPackages.Values.Cast<string>().ToArray();
-            
-            //TODO test if function still works if no element is checked
-            if (packages == null)
+            string[] checkedElements = checkedListBoxApps.CheckedItems.Cast<String>().ToArray();
+            Hashtable packagesApplicationList = readApplicationList();
+            List<string> checkedPackages = new List<string>();
+
+            if (checkedElements.Length < 1)
                 return;
 
+            for (int i=0; i < checkedElements.Count<string>(); i++)
+            {
+                checkedPackages.Add(packagesApplicationList[checkedElements[i]].ToString());
+            }
+
             string chocolateyCommand = "";
-            foreach (string str in packages)
+            foreach (string str in checkedPackages)
                 chocolateyCommand += str + " ";
 
-            chocolateyCommand = "choco install " + packages + "-y";
+            chocolateyCommand = "choco install " + chocolateyCommand + "-y";
 
 
             //TODO: Check if Windows Terminal is installed. Use it if so
@@ -176,7 +180,6 @@ namespace SetupTool
             shell.StartInfo.FileName = "powershell.exe";
             shell.StartInfo.RedirectStandardInput = true;
             shell.StartInfo.RedirectStandardOutput = true;
-            shell.StartInfo.CreateNoWindow = true;
             shell.StartInfo.UseShellExecute = false;
             shell.Start();
 
