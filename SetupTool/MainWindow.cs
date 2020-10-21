@@ -27,6 +27,9 @@ namespace SetupTool
 
         private void Start_btn_Click(object sender, EventArgs e)
         {
+            if (!isChocolateyInstalled())
+                installChocolatey();
+
             installPackages();
         }
 
@@ -188,7 +191,41 @@ namespace SetupTool
             shell.StandardInput.Flush();
             shell.StandardInput.Close();
             shell.WaitForExit();
-            string ret = shell.StandardOutput.ReadToEnd();
+        }
+
+        /// <summary>
+        /// Checks if chocolatey package manager is installed
+        /// </summary>
+        /// <returns>True if chocolatey is installed, false if it isn't</returns>
+        private bool isChocolateyInstalled()
+        {
+            FileInfo fi = new FileInfo(@"C:\ProgramData\chocolatey\choco.exe");
+
+            if (fi.Exists)
+                return true;
+            else
+                return false;
+        }
+
+        /// <summary>
+        /// Installs the chocolatey package manager on the system
+        /// </summary>
+        private void installChocolatey()
+        {
+            //This command is from chocolatey.org. It runs an installer using the PowerShell
+            string installCommand = "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))";
+            
+            Process shell = new Process();
+            shell.StartInfo.FileName = "powershell.exe";
+            shell.StartInfo.RedirectStandardInput = true;
+            shell.StartInfo.RedirectStandardOutput = true;
+            shell.StartInfo.UseShellExecute = false;
+            shell.Start();
+
+            shell.StandardInput.WriteLine(installCommand);
+            shell.StandardInput.Flush();
+            shell.StandardInput.Close();
+            shell.WaitForExit();
         }
     }
 }
