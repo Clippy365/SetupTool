@@ -31,5 +31,9 @@
   "VLC Media Player": "vlc",
   "Foxit PDF Reader": "foxitreader",
   "WinSCP": "winscp",
-  "Epic Games Launcher": "epicgameslauncher"
+  "Epic Games Launcher": "epicgameslauncher",
+  "Microsoft Office 2019 ProPlus Retail": "microsoft-office-deployment /64bit /Language MatchOS /Product ProPlusRetail /Exclude OneDrive Lync Groove",
+  "Microsoft Office 2019 Home and Business Retail": "microsoft-office-deployment /64bit /Language MatchOS /Product HomeBusinessRetail /Exclude OneDrive Lync Groove",
+  "Microsoft Office365 Personal": "microsoft-office-deployment /64bit /Language MatchOS /Product Personal2019Retail /Exclude OneDrive Lync Groove",
+  "Windows Terminal": "microsoft-windows-terminal"
 }
