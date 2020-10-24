@@ -178,19 +178,10 @@ namespace SetupTool
 
             chocolateyCommand = "choco install " + chocolateyCommand + "-y";
 
-
-            //TODO: Check if Windows Terminal is installed. Use it if so
-            Process shell = new Process();
-            shell.StartInfo.FileName = "powershell.exe";
-            shell.StartInfo.RedirectStandardInput = true;
-            shell.StartInfo.RedirectStandardOutput = true;
-            shell.StartInfo.UseShellExecute = false;
-            shell.Start();
-
-            shell.StandardInput.WriteLine(chocolateyCommand);
-            shell.StandardInput.Flush();
-            shell.StandardInput.Close();
-            shell.WaitForExit();
+            if (isWindowsTerminalInstalled())
+                executeShellCommand("wt.exe", chocolateyCommand);
+            else
+                executeShellCommand("powershell.exe", chocolateyCommand);
         }
 
         /// <summary>
@@ -214,18 +205,48 @@ namespace SetupTool
         {
             //This command is from chocolatey.org. It runs an installer using the PowerShell
             string installCommand = "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))";
-            
+
+            if (isWindowsTerminalInstalled())
+                executeShellCommand("wt.exe", installCommand);
+            else
+                executeShellCommand("powershell.exe", installCommand);
+        }
+
+        /// <summary>
+        /// Executes a command on the specified shell
+        /// </summary>
+        /// <param name="shellType">Can be "powershell.exe" or "wt.exe" (The new Windows Terminal)</param>
+        /// <param name="command">The command to be executed</param>
+        private void executeShellCommand(string shellType, string command) //TODO: shellType should be enum
+        {
             Process shell = new Process();
-            shell.StartInfo.FileName = "powershell.exe";
+            shell.StartInfo.FileName = shellType;
             shell.StartInfo.RedirectStandardInput = true;
             shell.StartInfo.RedirectStandardOutput = true;
             shell.StartInfo.UseShellExecute = false;
             shell.Start();
 
-            shell.StandardInput.WriteLine(installCommand);
+            shell.StandardInput.WriteLine(command);
             shell.StandardInput.Flush();
             shell.StandardInput.Close();
             shell.WaitForExit();
+        }
+
+        /// <summary>
+        /// Checks if Windows Terminal is installed
+        /// </summary>
+        /// <returns>True if Windows Terminal is installed, false if not</returns>
+        private bool isWindowsTerminalInstalled()
+        {
+            DirectoryInfo[] arr  = new DirectoryInfo(@"C:\Program Files\WindowsApps\").GetDirectories();
+
+            foreach (DirectoryInfo di in arr)
+            {
+                if (di.Name.StartsWith("Microsoft.WindowsTerminal"))
+                    return true;
+            }
+
+            return false;
         }
     }
 }
