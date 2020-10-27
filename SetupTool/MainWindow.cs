@@ -178,10 +178,7 @@ namespace SetupTool
 
             chocolateyCommand = "choco install " + chocolateyCommand + "-y";
 
-            if (isWindowsTerminalInstalled())
-                executeShellCommand("wt.exe", chocolateyCommand);
-            else
-                executeShellCommand("powershell.exe", chocolateyCommand);
+            executeShellCommand(chocolateyCommand);
         }
 
         /// <summary>
@@ -205,31 +202,28 @@ namespace SetupTool
         {
             //This command is from chocolatey.org. It runs an installer using the PowerShell
             string installCommand = "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))";
-
-            if (isWindowsTerminalInstalled())
-                executeShellCommand("wt.exe", installCommand);
-            else
-                executeShellCommand("powershell.exe", installCommand);
+            
+            executeShellCommand(installCommand);
         }
 
         /// <summary>
-        /// Executes a command on the specified shell
+        /// Executes a command on a PowerShell
         /// </summary>
-        /// <param name="shellType">Can be "powershell.exe" or "wt.exe" (The new Windows Terminal)</param>
         /// <param name="command">The command to be executed</param>
-        private void executeShellCommand(string shellType, string command) //TODO: shellType should be enum
+        private void executeShellCommand(string command)
         {
             Process shell = new Process();
-            shell.StartInfo.FileName = shellType;
+            shell.StartInfo.FileName = "powershell.exe";
             shell.StartInfo.RedirectStandardInput = true;
-            shell.StartInfo.RedirectStandardOutput = true;
+            shell.StartInfo.RedirectStandardOutput = false;
+            shell.StartInfo.RedirectStandardError = true;
             shell.StartInfo.UseShellExecute = false;
+            shell.StartInfo.CreateNoWindow = false;
             shell.Start();
 
             shell.StandardInput.WriteLine(command);
             shell.StandardInput.Flush();
             shell.StandardInput.Close();
-            shell.WaitForExit();
         }
 
         /// <summary>
