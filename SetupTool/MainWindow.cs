@@ -14,13 +14,12 @@ using System.Windows.Forms.Layout;
 using System.Collections;
 using System.Diagnostics;
 
-using static System.Windows.Forms.ListBox;
-using SetupTool.Properties;
-
 namespace SetupTool
 {
     public partial class MainWindow : Form
     {
+        string[] settings = { "Uninstall OneDrive®", "Uninstall Bloatware", "Change privacy settings to strict", "Disable start menu ads", "Don't show last used files in explorer" };
+
         public MainWindow()
         {
             InitializeComponent();
@@ -32,6 +31,24 @@ namespace SetupTool
                 installChocolatey();
 
             installPackages();
+
+            //The corresponding methods are named (simililarly) to the strings in checkedListBoxSettings
+            string[] checkedItems = checkedListBoxSettings.CheckedItems.Cast<string>().ToArray();
+            for (int i = 0; i < checkedItems.Length; i++)
+            {
+                checkedItems[i] = checkedItems[i].Replace(" ", "_");
+                checkedItems[i] = checkedItems[i].Replace("®", "");
+                checkedItems[i] = checkedItems[i].Replace("'", "");
+                
+                
+                Type thisType = this.GetType();
+                System.Reflection.MethodInfo theMethod = thisType.GetMethod(checkedItems[i]);
+                
+                try
+                { theMethod.Invoke(this, null); }
+                catch(Exception ex)
+                { MessageBox.Show(ex.Message); }
+            }
         }
 
         private void Exit_btn_Click(object sender, EventArgs e)
@@ -50,8 +67,7 @@ namespace SetupTool
                     checkedListBoxApps.Items.Add(de.Key.ToString());
                 }
             }
-
-            string[] settings = { "Uninstall OneDrive®",  "Uninstall Bloatware", "Change privacy settings to strict", "Disable start menu ads", "Don't show last used files in explorer"};
+            
             checkedListBoxSettings.Items.AddRange(settings);
         }
 
@@ -228,6 +244,32 @@ namespace SetupTool
             shell.StandardInput.WriteLine(command);
             shell.StandardInput.Flush();
             shell.StandardInput.Close();
+        }
+
+
+        public void Uninstall_OneDrive()
+        {
+
+        }
+
+        public void Uninstall_Bloatware()
+        {
+
+        }
+
+        public void Change_privacy_settings_to_strict()
+        {
+
+        }
+
+        public void Disable_start_menu_ads()
+        {
+
+        }
+
+        public void Dont_show_last_used_files_in_explorer()
+        {
+
         }
     }
 }
