@@ -27,7 +27,7 @@ namespace SetupTool
 
         private void Start_btn_Click(object sender, EventArgs e)
         {
-            if (!isChocolateyInstalled())
+            if (!isChocolateyInstalled() && checkedListBoxApps.Items.Count > 0)
                 installChocolatey();
 
             installPackages();
@@ -224,23 +224,6 @@ namespace SetupTool
             shell.StandardInput.WriteLine(command);
             shell.StandardInput.Flush();
             shell.StandardInput.Close();
-        }
-
-        /// <summary>
-        /// Checks if Windows Terminal is installed
-        /// </summary>
-        /// <returns>True if Windows Terminal is installed, false if not</returns>
-        private bool isWindowsTerminalInstalled()
-        {
-            DirectoryInfo[] arr  = new DirectoryInfo(@"C:\Program Files\WindowsApps\").GetDirectories();
-
-            foreach (DirectoryInfo di in arr)
-            {
-                if (di.Name.StartsWith("Microsoft.WindowsTerminal"))
-                    return true;
-            }
-
-            return false;
         }
     }
 }
