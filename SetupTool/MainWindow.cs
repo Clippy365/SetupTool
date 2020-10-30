@@ -15,6 +15,7 @@ using System.Collections;
 using System.Diagnostics;
 
 using static System.Windows.Forms.ListBox;
+using SetupTool.Properties;
 
 namespace SetupTool
 {
@@ -49,6 +50,9 @@ namespace SetupTool
                     checkedListBoxApps.Items.Add(de.Key.ToString());
                 }
             }
+
+            string[] settings = { "Uninstall OneDrive®",  "Uninstall Bloatware", "Change privacy settings to strict", "Disable start menu ads", "Don't show last used files in explorer"};
+            checkedListBoxSettings.Items.AddRange(settings);
         }
 
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
