@@ -252,9 +252,47 @@ namespace SetupTool
 
         }
 
+        /// <summary>
+        /// For now this removes a bunch of preinstalled Apps.
+        /// </summary>
         public void Uninstall_Bloatware()
         {
+            string shellCommand = @"Get-AppxPackage *3dbuilder* | Remove-AppxPackage
+                                    Get - AppxPackage * Appconnector * | Remove - AppxPackage
+                                    Get - AppxPackage * GAMELOFTSA.Asphalt8Airborne * | Remove - AppxPackage
+                                    Get - AppxPackage * CandyCrushSodaSaga * | Remove - AppxPackage
+                                    Get - AppxPackage * FarmVille2CountryEscape * | Remove - AppxPackage
+                                    Get - AppxPackage * WindowsFeedbackHub * | Remove - AppxPackage
+                                    Get - AppxPackage * officehub * | Remove - AppxPackage
+                                    Get - AppxPackage * skypeapp * | Remove - AppxPackage
+                                    Get - AppxPackage * getstarted * | Remove - AppxPackage
+                                    Get - AppxPackage * zunemusic * | Remove - AppxPackage
+                                    Get - AppxPackage * windowsmaps * | Remove - AppxPackage
+                                    Get - AppxPackage * Messaging * | Remove - AppxPackage
+                                    Get - AppxPackage * solitairecollection * | Remove - AppxPackage
+                                    Get - AppxPackage * ConnectivityStore * | Remove - AppxPackage
+                                    Get - AppxPackage * bingfinance * | Remove - AppxPackage
+                                    Get - AppxPackage * zunevideo * | Remove - AppxPackage
+                                    Get - AppxPackage * Netflix * | Remove - AppxPackage
+                                    Get - AppxPackage * bingnews * | Remove - AppxPackage
+                                    Get - AppxPackage * OneConnect * | Remove - AppxPackage
+                                    Get - AppxPackage * people * | Remove - AppxPackage
+                                    Get - AppxPackage * CommsPhone * | Remove - AppxPackage
+                                    Get - AppxPackage * windowsphone * | Remove - AppxPackage
+                                    Get - AppxPackage * bingsports * | Remove - AppxPackage
+                                    Get - AppxPackage * Office.Sway * | Remove - AppxPackage
+                                    Get - AppxPackage * Twitter * | Remove - AppxPackage
+                                    Get - AppxPackage * soundrecorder * | Remove - AppxPackage
+                                    Get - AppxPackage * bingweather * | Remove - AppxPackage
+                                    Get - AppxPackage * TuneInRadio * | Remove - AppxPackage
+                                    Get - AppxPackage * Microsoft.AgeCastles * | Remove - AppxPackage
+                                    Get - AppxPackage * Drawboard * | Remove - AppxPackage
+                                    Get - AppxPackage * Microsoft.XboxIdentityProvider * | Remove - AppxPackage
+                                    Get - AppxPackage * xboxapp * | Remove - AppxPackage
+                                    Get - AppxPackage * XboxOneSmartGlass * | Remove - AppxPackage
+                                    Get - AppxPackage * facebook * | Remove - AppxPackage";
 
+            executeShellCommand(shellCommand);
         }
 
         public void Change_privacy_settings_to_strict()
