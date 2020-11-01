@@ -249,6 +249,28 @@ namespace SetupTool
 
         public void Uninstall_OneDrive()
         {
+            string oneDriveSetupPath = Path.GetFullPath("%SYSTEMROOT%");
+            oneDriveSetupPath += "SysWOW64\\OneDriveSetup.exe";
+            FileInfo fi = new FileInfo(oneDriveSetupPath);
+
+            //For 32-bit machines use the 32-bit path
+            if (!fi.Exists)
+            {
+                oneDriveSetupPath = Path.GetFullPath("%SYSTEMROOT%");
+                oneDriveSetupPath += "System32\\OneDriveSetup.exe";
+            }
+
+            //Kill all OneDrive processes before uninstalling anything
+            Process[] OneDriveProcesses = Process.GetProcessesByName("OneDrive.exe");
+            foreach (Process p in OneDriveProcesses)
+                p.Kill();
+
+
+            //Remove OneDrive with OneDriveSetup.exe
+            Process oneDriveSetup = new Process();
+            oneDriveSetup.StartInfo.FileName = oneDriveSetupPath;
+            oneDriveSetup.StartInfo.Arguments = "/uninstall";
+            oneDriveSetup.Start();
 
         }
 
