@@ -36,7 +36,7 @@ namespace SetupTool
             string[] checkedItems = checkedListBoxSettings.CheckedItems.Cast<string>().ToArray();
             for (int i = 0; i < checkedItems.Length; i++)
             {
-                checkedItems[i] = checkedItems[i].Replace(" ", "_");
+                checkedItems[i] = checkedItems[i].Replace(" ", "_"); //Actually the way Microsoft does this
                 checkedItems[i] = checkedItems[i].Replace("®", "");
                 checkedItems[i] = checkedItems[i].Replace("'", "");
                 
@@ -249,15 +249,15 @@ namespace SetupTool
 
         public void Uninstall_OneDrive()
         {
-            string oneDriveSetupPath = Path.GetFullPath("%SYSTEMROOT%");
-            oneDriveSetupPath += "SysWOW64\\OneDriveSetup.exe";
+            string oneDriveSetupPath = Environment.ExpandEnvironmentVariables("%SYSTEMROOT%");
+            oneDriveSetupPath += "\\SysWOW64\\OneDriveSetup.exe";
             FileInfo fi = new FileInfo(oneDriveSetupPath);
 
             //For 32-bit machines use the 32-bit path
             if (!fi.Exists)
             {
-                oneDriveSetupPath = Path.GetFullPath("%SYSTEMROOT%");
-                oneDriveSetupPath += "System32\\OneDriveSetup.exe";
+                oneDriveSetupPath = Environment.ExpandEnvironmentVariables("%SYSTEMROOT%");
+                oneDriveSetupPath += "\\System32\\OneDriveSetup.exe";
             }
 
             //Kill all OneDrive processes before uninstalling anything
