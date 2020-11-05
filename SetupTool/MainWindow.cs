@@ -14,12 +14,12 @@ using System.Windows.Forms.Layout;
 using System.Collections;
 using System.Diagnostics;
 
-using static System.Windows.Forms.ListBox;
-
 namespace SetupTool
 {
     public partial class MainWindow : Form
     {
+        string[] settings = { "Uninstall OneDrive®", "Uninstall Bloatware", "Change privacy settings to strict", "Disable start menu ads", "Don't show last used files in explorer" };
+
         public MainWindow()
         {
             InitializeComponent();
@@ -31,6 +31,24 @@ namespace SetupTool
                 installChocolatey();
 
             installPackages();
+
+            //The corresponding methods are named (simililarly) to the strings in checkedListBoxSettings
+            string[] checkedItems = checkedListBoxSettings.CheckedItems.Cast<string>().ToArray();
+            for (int i = 0; i < checkedItems.Length; i++)
+            {
+                checkedItems[i] = checkedItems[i].Replace(" ", "_"); //Actually the way Microsoft does this
+                checkedItems[i] = checkedItems[i].Replace("®", "");
+                checkedItems[i] = checkedItems[i].Replace("'", "");
+                
+                
+                Type thisType = this.GetType();
+                System.Reflection.MethodInfo theMethod = thisType.GetMethod(checkedItems[i]);
+                
+                try
+                { theMethod.Invoke(this, null); }
+                catch(Exception ex)
+                { MessageBox.Show(ex.Message); }
+            }
         }
 
         private void Exit_btn_Click(object sender, EventArgs e)
@@ -49,6 +67,8 @@ namespace SetupTool
                     checkedListBoxApps.Items.Add(de.Key.ToString());
                 }
             }
+            
+            checkedListBoxSettings.Items.AddRange(settings);
         }
 
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -224,6 +244,92 @@ namespace SetupTool
             shell.StandardInput.WriteLine(command);
             shell.StandardInput.Flush();
             shell.StandardInput.Close();
+        }
+
+
+        public void Uninstall_OneDrive()
+        {
+            string oneDriveSetupPath = Environment.ExpandEnvironmentVariables("%SYSTEMROOT%");
+            oneDriveSetupPath += "\\SysWOW64\\OneDriveSetup.exe";
+            FileInfo fi = new FileInfo(oneDriveSetupPath);
+
+            //For 32-bit machines use the 32-bit path
+            if (!fi.Exists)
+            {
+                oneDriveSetupPath = Environment.ExpandEnvironmentVariables("%SYSTEMROOT%");
+                oneDriveSetupPath += "\\System32\\OneDriveSetup.exe";
+            }
+
+            //Kill all OneDrive processes before uninstalling anything
+            Process[] OneDriveProcesses = Process.GetProcessesByName("OneDrive.exe");
+            foreach (Process p in OneDriveProcesses)
+                p.Kill();
+
+
+            //Remove OneDrive with OneDriveSetup.exe
+            Process oneDriveSetup = new Process();
+            oneDriveSetup.StartInfo.FileName = oneDriveSetupPath;
+            oneDriveSetup.StartInfo.Arguments = "/uninstall";
+            oneDriveSetup.Start();
+
+        }
+
+        /// <summary>
+        /// For now this removes a bunch of preinstalled Apps.
+        /// </summary>
+        public void Uninstall_Bloatware()
+        {
+            string shellCommand = @"Get-AppxPackage *3dbuilder* | Remove-AppxPackage
+                                    Get - AppxPackage * Appconnector * | Remove - AppxPackage
+                                    Get - AppxPackage * GAMELOFTSA.Asphalt8Airborne * | Remove - AppxPackage
+                                    Get - AppxPackage * CandyCrushSodaSaga * | Remove - AppxPackage
+                                    Get - AppxPackage * FarmVille2CountryEscape * | Remove - AppxPackage
+                                    Get - AppxPackage * WindowsFeedbackHub * | Remove - AppxPackage
+                                    Get - AppxPackage * officehub * | Remove - AppxPackage
+                                    Get - AppxPackage * skypeapp * | Remove - AppxPackage
+                                    Get - AppxPackage * getstarted * | Remove - AppxPackage
+                                    Get - AppxPackage * zunemusic * | Remove - AppxPackage
+                                    Get - AppxPackage * windowsmaps * | Remove - AppxPackage
+                                    Get - AppxPackage * Messaging * | Remove - AppxPackage
+                                    Get - AppxPackage * solitairecollection * | Remove - AppxPackage
+                                    Get - AppxPackage * ConnectivityStore * | Remove - AppxPackage
+                                    Get - AppxPackage * bingfinance * | Remove - AppxPackage
+                                    Get - AppxPackage * zunevideo * | Remove - AppxPackage
+                                    Get - AppxPackage * Netflix * | Remove - AppxPackage
+                                    Get - AppxPackage * bingnews * | Remove - AppxPackage
+                                    Get - AppxPackage * OneConnect * | Remove - AppxPackage
+                                    Get - AppxPackage * people * | Remove - AppxPackage
+                                    Get - AppxPackage * CommsPhone * | Remove - AppxPackage
+                                    Get - AppxPackage * windowsphone * | Remove - AppxPackage
+                                    Get - AppxPackage * bingsports * | Remove - AppxPackage
+                                    Get - AppxPackage * Office.Sway * | Remove - AppxPackage
+                                    Get - AppxPackage * Twitter * | Remove - AppxPackage
+                                    Get - AppxPackage * soundrecorder * | Remove - AppxPackage
+                                    Get - AppxPackage * bingweather * | Remove - AppxPackage
+                                    Get - AppxPackage * TuneInRadio * | Remove - AppxPackage
+                                    Get - AppxPackage * Microsoft.AgeCastles * | Remove - AppxPackage
+                                    Get - AppxPackage * Drawboard * | Remove - AppxPackage
+                                    Get - AppxPackage * Microsoft.XboxIdentityProvider * | Remove - AppxPackage
+                                    Get - AppxPackage * xboxapp * | Remove - AppxPackage
+                                    Get - AppxPackage * XboxOneSmartGlass * | Remove - AppxPackage
+                                    Get - AppxPackage * facebook * | Remove - AppxPackage";
+
+            executeShellCommand(shellCommand);
+        }
+
+        public void Change_privacy_settings_to_strict()
+        {
+
+        }
+
+        public void Disable_start_menu_ads()
+        {
+
+        }
+
+        public void Dont_show_last_used_files_in_explorer()
+        {
+
         }
     }
 }

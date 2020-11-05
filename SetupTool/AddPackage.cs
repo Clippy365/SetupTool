@@ -34,7 +34,17 @@ namespace SetupTool
                 if (fi.Exists)
                 {
                     Hashtable list = JsonConvert.DeserializeObject<Hashtable>(File.ReadAllText(fullPath));
-                    list.Add(textBox_displayName.Text, textBox_packageName.Text);
+                    
+                    //Don't allow duplicates
+                    try
+                    { list.Add(textBox_displayName.Text, textBox_packageName.Text); }
+
+                    catch(Exception ex)
+                    { 
+                        MessageBox.Show(ex.Message);
+                        return; 
+                    }
+
                     var newJsonObject = JsonConvert.SerializeObject(list, Formatting.Indented);
                     System.IO.File.WriteAllText(@fullPath, newJsonObject);
                     this.Close();

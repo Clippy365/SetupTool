@@ -35,5 +35,11 @@
   "Microsoft Office 2019 ProPlus Retail": "microsoft-office-deployment /64bit /Language MatchOS /Product ProPlusRetail /Exclude OneDrive Lync Groove",
   "Microsoft Office 2019 Home and Business Retail": "microsoft-office-deployment /64bit /Language MatchOS /Product HomeBusinessRetail /Exclude OneDrive Lync Groove",
   "Microsoft Office365 Personal": "microsoft-office-deployment /64bit /Language MatchOS /Product Personal2019Retail /Exclude OneDrive Lync Groove",
-  "Windows Terminal": "microsoft-windows-terminal"
+  "Windows Terminal": "microsoft-windows-terminal",
+  "Notepad++": "notepadplusplus",
+  "PDF24": "pdf24",
+  "PuTTY": "putty.install",
+  "Speccy": "speccy",
+  "Unchecky": "unchecky",
+  "TeamViewer": "teamviewer"
 }

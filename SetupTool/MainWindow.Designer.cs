@@ -91,10 +91,12 @@
             // 
             // checkedListBoxSettings
             // 
+            this.checkedListBoxSettings.CheckOnClick = true;
             this.checkedListBoxSettings.FormattingEnabled = true;
             this.checkedListBoxSettings.Location = new System.Drawing.Point(6, 19);
             this.checkedListBoxSettings.Name = "checkedListBoxSettings";
             this.checkedListBoxSettings.Size = new System.Drawing.Size(363, 259);
+            this.checkedListBoxSettings.Sorted = true;
             this.checkedListBoxSettings.TabIndex = 0;
             // 
             // menuStrip1
@@ -121,7 +123,7 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(93, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
