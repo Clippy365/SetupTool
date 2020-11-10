@@ -315,7 +315,7 @@ namespace SetupTool
                                     Get - AppxPackage * XboxOneSmartGlass * | Remove - AppxPackage
                                     Get - AppxPackage * facebook * | Remove - AppxPackage";
 
-            executeShellCommand(shellCommand);
+            Process.Start("Powershell.exe", shellCommand);
         }
 
         public void Change_privacy_settings_to_strict()
