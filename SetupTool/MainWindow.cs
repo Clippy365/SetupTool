@@ -29,7 +29,7 @@ namespace SetupTool
 
         private void Start_btn_Click(object sender, EventArgs e)
         {
-            if (!isChocolateyInstalled() && checkedListBoxApps.Items.Count > 0)
+            if (!isChocolateyInstalled() && checkedListBoxApps.SelectedItems.Count > 0)
                 installChocolatey();
 
             installPackages();
