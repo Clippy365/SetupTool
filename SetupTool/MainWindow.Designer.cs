@@ -61,6 +61,7 @@
             // 
             // buttonStart
             // 
+            this.buttonStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.buttonStart.Location = new System.Drawing.Point(336, 379);
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(100, 41);
