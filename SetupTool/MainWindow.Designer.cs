@@ -41,8 +41,6 @@
             this.buttonDeletePackage = new System.Windows.Forms.Button();
             this.buttonAddPackage = new System.Windows.Forms.Button();
             this.buttonUncheckAllSoftware = new System.Windows.Forms.Button();
-            this.buttonCheckRecommendedSoftware = new System.Windows.Forms.Button();
-            this.buttonCheckRecommendedSettings = new System.Windows.Forms.Button();
             this.buttonUncheckAllSettings = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -173,28 +171,6 @@
             this.buttonUncheckAllSoftware.UseVisualStyleBackColor = true;
             this.buttonUncheckAllSoftware.Click += new System.EventHandler(this.buttonUncheckAllSoftware_Click);
             // 
-            // buttonCheckRecommendedSoftware
-            // 
-            this.buttonCheckRecommendedSoftware.Enabled = false;
-            this.buttonCheckRecommendedSoftware.Location = new System.Drawing.Point(176, 333);
-            this.buttonCheckRecommendedSoftware.Name = "buttonCheckRecommendedSoftware";
-            this.buttonCheckRecommendedSoftware.Size = new System.Drawing.Size(126, 23);
-            this.buttonCheckRecommendedSoftware.TabIndex = 9;
-            this.buttonCheckRecommendedSoftware.Text = "Check recommended";
-            this.buttonCheckRecommendedSoftware.UseVisualStyleBackColor = true;
-            this.buttonCheckRecommendedSoftware.Click += new System.EventHandler(this.buttonCheckRecommendedSoftware_Click);
-            // 
-            // buttonCheckRecommendedSettings
-            // 
-            this.buttonCheckRecommendedSettings.Enabled = false;
-            this.buttonCheckRecommendedSettings.Location = new System.Drawing.Point(557, 333);
-            this.buttonCheckRecommendedSettings.Name = "buttonCheckRecommendedSettings";
-            this.buttonCheckRecommendedSettings.Size = new System.Drawing.Size(126, 23);
-            this.buttonCheckRecommendedSettings.TabIndex = 11;
-            this.buttonCheckRecommendedSettings.Text = "Check recommended";
-            this.buttonCheckRecommendedSettings.UseVisualStyleBackColor = true;
-            this.buttonCheckRecommendedSettings.Click += new System.EventHandler(this.buttonCheckRecommendedSettings_Click);
-            // 
             // buttonUncheckAllSettings
             // 
             this.buttonUncheckAllSettings.Location = new System.Drawing.Point(689, 333);
@@ -210,9 +186,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(770, 432);
-            this.Controls.Add(this.buttonCheckRecommendedSettings);
             this.Controls.Add(this.buttonUncheckAllSettings);
-            this.Controls.Add(this.buttonCheckRecommendedSoftware);
             this.Controls.Add(this.buttonUncheckAllSoftware);
             this.Controls.Add(this.buttonAddPackage);
             this.Controls.Add(this.buttonDeletePackage);
@@ -248,8 +222,6 @@
         private System.Windows.Forms.Button buttonDeletePackage;
         private System.Windows.Forms.Button buttonAddPackage;
         private System.Windows.Forms.Button buttonUncheckAllSoftware;
-        private System.Windows.Forms.Button buttonCheckRecommendedSoftware;
-        private System.Windows.Forms.Button buttonCheckRecommendedSettings;
         private System.Windows.Forms.Button buttonUncheckAllSettings;
     }
 }
