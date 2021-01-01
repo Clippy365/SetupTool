@@ -19,7 +19,7 @@ namespace SetupTool
 {
     public partial class MainWindow : Form
     {
-        string[] settings = { "Uninstall OneDrive®", "Uninstall Bloatware", "Change privacy settings to strict", "Disable start menu ads", "Don't show last used files in explorer" };
+        string[] settings = { "Uninstall OneDrive®", "Uninstall Bloatware", "Change privacy settings to strict", "Disable start menu ads", "Don't show last used files in explorer", "Disable settings cloudsync" };
 
         public MainWindow()
         {
@@ -322,40 +322,31 @@ namespace SetupTool
         /// <summary>
         /// For now this just changes a bunch of registry settings without any granularity. May be changed in the future
         /// </summary>
-        //TODO: test
         public void Change_privacy_settings_to_strict()
         {
-            string[] HKCUKeysToCreate = { @"HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge", @"HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge", @"HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\FlipAhead", @"HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\FlipAhead", @"HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\Main", @"HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\Main", @"HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\ServiceUI", @"HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\ServiceUI", @"HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\ServiceUI\ShowSearchHistory", @"HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\ServiceUI\ShowSearchHistory", @"HKCU\SOFTWARE\Microsoft\Siuf", @"HKCU\SOFTWARE\Microsoft\Siuf\Rules", @"HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization", @"HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\BrowserSettings", @"HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Windows Search", @"HKCU\SOFTWARE\Policies\Microsoft\Edge" };
-            string[] HKLMKeysToCreate = { @"HKLM\SOFTWARE\Microsoft\PolicyManager\current\device\Bluetooth", @"HKLM\SOFTWARE\Microsoft\PolicyManager\current\device\Browser", @"HKLM\SOFTWARE\Microsoft\PolicyManager\current\device\System", @"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization", @"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config", @"HKLM\SOFTWARE\Policies\Microsoft\Edge", @"HKLM\SOFTWARE\Policies\Microsoft\InputPersonalization", @"HKLM\SOFTWARE\Policies\Microsoft\Speech", @"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\AppCompat", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\HandwritingErrorReports", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\Messaging", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\TabletPC", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search", @"HKLM\SYSTEM\CurrentControlSet\Control\WMI\AutoLogger\AutoLogger-Diagtrack-Listener", @"HKLM\System\CurrentControlSet\Control\WMI\AutoLogger\AutoLogger-Diagtrack-Listener" };
-            string[] HKLMValuesToDelete = { @"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet\SpyNetReporting", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\System\AllowCrossDeviceClipboard" };
-
-            string[] HKCUSubKeys = { @"Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\FlipAhead\FPEnabled", @"Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\Main\DoNotTrack", @"Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\Main\ShowSearchSuggestionsGlobal", @"Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\ServiceUI\EnableCortana", @"Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\ServiceUI\ShowSearchHistory\(Default)", @"SOFTWARE\Microsoft\Clipboard\EnableClipboardHistory", @"SOFTWARE\Microsoft\InputPersonalization\RestrictImplicitInkCollection", @"SOFTWARE\Microsoft\InputPersonalization\RestrictImplicitTextCollection", @"SOFTWARE\Microsoft\InputPersonalization\TrainedDataStore\HarvestContacts", @"SOFTWARE\Microsoft\Personalization\Settings\AcceptedPrivacyPolicy", @"SOFTWARE\Microsoft\Siuf\Rules\NumberOfSIUFInPeriod", @"SOFTWARE\Microsoft\Siuf\Rules\PeriodInNanoSeconds", @"SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\appDiagnostics\Value", @"SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userAccountInformation\Value", @"SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\SilentInstalledAppsEnabled", @"SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\SoftLandingEnabled", @"SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\SubscribedContent-338388Enabled", @"SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\SubscribedContent-338389Enabled", @"SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\SubscribedContent-338393Enabled", @"SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\SubscribedContent-353694Enabled", @"SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\SubscribedContent-353696Enabled", @"SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\SubscribedContent-353698Enabled", @"SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\SystemPaneSuggestionsEnabled", @"SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\SystemSettingsDownloadMode", @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\ShowSyncProviderNotifications", @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\Start_TrackDocs", @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\Start_TrackProgs", @"SOFTWARE\Microsoft\Windows\CurrentVersion\Search\BingSearchEnabled", @"SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Accessibility\Enabled", @"SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\BrowserSettings\Enabled", @"SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Credentials\Enabled", @"SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Language\Enabled", @"SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Personalization\Enabled", @"SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Windows\Enabled", @"SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\SyncPolicy", @"SOFTWARE\Microsoft\Windows\CurrentVersion\Windows Search\CortanaConsent", @"SOFTWARE\Policies\Microsoft\Edge\AddressBarMicrosoftSearchInBingProviderEnabled", @"SOFTWARE\Policies\Microsoft\Edge\AutofillAddressEnabled", @"SOFTWARE\Policies\Microsoft\Edge\AutofillCreditCardEnabled", @"SOFTWARE\Policies\Microsoft\Edge\ConfigureDoNotTrack", @"SOFTWARE\Policies\Microsoft\Edge\LocalProvidersEnabled", @"SOFTWARE\Policies\Microsoft\Edge\MetricsReportingEnabled", @"SOFTWARE\Policies\Microsoft\Edge\PaymentMethodQueryEnabled", @"SOFTWARE\Policies\Microsoft\Edge\PersonalizationReportingEnabled", @"SOFTWARE\Policies\Microsoft\Edge\SearchSuggestEnabled", @"SOFTWARE\Policies\Microsoft\Edge\SendSiteInfoToImproveServices", @"SOFTWARE\Policies\Microsoft\Edge\UserFeedbackAllowed" };
-            int[] HKCUValuesToSet    = { 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0 };
-            
-            RegistryValueKind[] HKCURegValueKind = new RegistryValueKind[HKCUSubKeys.Length];
-            for (int i = 0; i < HKCURegValueKind.Length; i++)
-            {
-                //12, 13, 51, 52 are REG_SZ
-                if (i == 12 || i == 13 || i == 51 || i == 52)
-                    HKCURegValueKind[i] = RegistryValueKind.String;
-                else
-                    HKCURegValueKind[i] = RegistryValueKind.DWord;
-            }
-
-            for (int i = 0; i < HKCUSubKeys.Length; i++)
-            {
-                Registry.SetValue(@"HKCU" + HKCUSubKeys[i], HKCUValuesToSet[i].ToString(), HKCURegValueKind[i]);
-            }
+            Process regeditProcess = Process.Start("regedit.exe", "/s ChangePrivacySettingsToStrict.reg");
+            regeditProcess.WaitForExit();
         }
 
         public void Disable_start_menu_ads()
         {
-
+            Process regeditProcess = Process.Start("regedit.exe", "/s DisableStartMenuAds.reg");
+            regeditProcess.WaitForExit();
         }
 
         public void Dont_show_last_used_files_in_explorer()
         {
+            Process regeditProcess = Process.Start("regedit.exe", "/s DontShowLastFilesInExplorer.reg");
+            regeditProcess.WaitForExit();
+        }
 
+        /// <summary>
+        /// Disables the sync of Windows Settings via cloud
+        /// </summary>
+        public void Disable_settings_cloudsync()
+        {
+            Process regeditProcess = Process.Start("regedit.exe", "/s DisableSettingsCloudsync.reg");
+            regeditProcess.WaitForExit();
         }
     }
 }
