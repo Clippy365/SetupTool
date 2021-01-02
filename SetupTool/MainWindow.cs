@@ -282,40 +282,112 @@ namespace SetupTool
         /// </summary>
         public void Uninstall_Bloatware()
         {
-            string shellCommand = @"Get-AppxPackage *3dbuilder* | Remove-AppxPackage
-                                    Get - AppxPackage * Appconnector * | Remove - AppxPackage
-                                    Get - AppxPackage * GAMELOFTSA.Asphalt8Airborne * | Remove - AppxPackage
-                                    Get - AppxPackage * CandyCrushSodaSaga * | Remove - AppxPackage
-                                    Get - AppxPackage * FarmVille2CountryEscape * | Remove - AppxPackage
-                                    Get - AppxPackage * WindowsFeedbackHub * | Remove - AppxPackage
-                                    Get - AppxPackage * officehub * | Remove - AppxPackage
-                                    Get - AppxPackage * skypeapp * | Remove - AppxPackage
-                                    Get - AppxPackage * getstarted * | Remove - AppxPackage
-                                    Get - AppxPackage * zunemusic * | Remove - AppxPackage
-                                    Get - AppxPackage * windowsmaps * | Remove - AppxPackage
-                                    Get - AppxPackage * Messaging * | Remove - AppxPackage
-                                    Get - AppxPackage * solitairecollection * | Remove - AppxPackage
-                                    Get - AppxPackage * ConnectivityStore * | Remove - AppxPackage
-                                    Get - AppxPackage * bingfinance * | Remove - AppxPackage
-                                    Get - AppxPackage * zunevideo * | Remove - AppxPackage
-                                    Get - AppxPackage * Netflix * | Remove - AppxPackage
-                                    Get - AppxPackage * bingnews * | Remove - AppxPackage
-                                    Get - AppxPackage * OneConnect * | Remove - AppxPackage
-                                    Get - AppxPackage * people * | Remove - AppxPackage
-                                    Get - AppxPackage * CommsPhone * | Remove - AppxPackage
-                                    Get - AppxPackage * windowsphone * | Remove - AppxPackage
-                                    Get - AppxPackage * bingsports * | Remove - AppxPackage
-                                    Get - AppxPackage * Office.Sway * | Remove - AppxPackage
-                                    Get - AppxPackage * Twitter * | Remove - AppxPackage
-                                    Get - AppxPackage * soundrecorder * | Remove - AppxPackage
-                                    Get - AppxPackage * bingweather * | Remove - AppxPackage
-                                    Get - AppxPackage * TuneInRadio * | Remove - AppxPackage
-                                    Get - AppxPackage * Microsoft.AgeCastles * | Remove - AppxPackage
-                                    Get - AppxPackage * Drawboard * | Remove - AppxPackage
-                                    Get - AppxPackage * Microsoft.XboxIdentityProvider * | Remove - AppxPackage
-                                    Get - AppxPackage * xboxapp * | Remove - AppxPackage
-                                    Get - AppxPackage * XboxOneSmartGlass * | Remove - AppxPackage
-                                    Get - AppxPackage * facebook * | Remove - AppxPackage";
+            string[] apps = {   // default Windows 10 apps
+                                "Microsoft.3DBuilder",
+                                "Microsoft.Appconnector",
+                                "Microsoft.BingFinance",
+                                "Microsoft.BingNews",
+                                "Microsoft.BingSports",
+                                "Microsoft.BingTranslator",
+                                "Microsoft.BingWeather",
+                                "Microsoft.GamingServices",
+                                "Microsoft.Microsoft3DViewer",
+                                "Microsoft.MicrosoftOfficeHub",
+                                "Microsoft.MicrosoftPowerBIForWindows",
+                                "Microsoft.MicrosoftSolitaireCollection",
+                                "Microsoft.MinecraftUWP",
+                                "Microsoft.NetworkSpeedTest",
+                                //"Microsoft.Office.OneNote",
+                                "Microsoft.People",
+                                "Microsoft.Print3D",
+                                "Microsoft.SkypeApp",
+                                "Microsoft.Wallet",
+                                "Microsoft.WindowsAlarms",
+                                //"Microsoft.WindowsCamera",
+                                "microsoft.windowscommunicationsapps",
+                                "Microsoft.WindowsMaps",
+                                "Microsoft.WindowsPhone",
+                                "Microsoft.WindowsSoundRecorder",
+                                "Microsoft.Xbox.TCUI",
+                                "Microsoft.XboxApp",
+                                "Microsoft.XboxGameOverlay",
+                                "Microsoft.XboxGamingOverlay",
+                                "Microsoft.XboxSpeechToTextOverlay",
+                                "Microsoft.YourPhone",
+                                "Microsoft.ZuneMusic",
+                                "Microsoft.ZuneVideo",
+
+                                // Threshold 2 apps,
+                                "Microsoft.CommsPhone",
+                                "Microsoft.ConnectivityStore",
+                                "Microsoft.GetHelp",
+                                "Microsoft.Getstarted",
+                                "Microsoft.Messaging",
+                                "Microsoft.Office.Sway",
+                                "Microsoft.OneConnect",
+                                "Microsoft.WindowsFeedbackHub",
+
+                                // Creators Update apps,
+                                "Microsoft.Microsoft3DViewer",
+
+                                // Redstone apps,
+                                "Microsoft.BingFoodAndDrink",
+                                "Microsoft.BingHealthAndFitness",
+                                "Microsoft.BingTravel",
+                                "Microsoft.WindowsReadingList",
+
+                                // Redstone 5 apps,
+                                "Microsoft.MixedReality.Portal",
+                                "Microsoft.ScreenSketch",
+                                "Microsoft.XboxGamingOverlay",
+                                "Microsoft.YourPhone",
+
+                                // non-Microsoft,
+                                "2FE3CB00.PicsArt-PhotoStudio",
+                                "46928bounde.EclipseManager",
+                                "4DF9E0F8.Netflix",
+                                "613EBCEA.PolarrPhotoEditorAcademicEdition",
+                                "6Wunderkinder.Wunderlist",
+                                "7EE7776C.LinkedInforWindows",
+                                "89006A2E.AutodeskSketchBook",
+                                "9E2F88E3.Twitter",
+                                "A278AB0D.DisneyMagicKingdoms",
+                                "A278AB0D.MarchofEmpires",
+                                "ActiproSoftwareLLC.562882FEEB491",
+                                "CAF9E577.Plex",
+                                "ClearChannelRadioDigital.iHeartRadio",
+                                "D52A8D61.FarmVille2CountryEscape",
+                                "D5EA27B7.Duolingo-LearnLanguagesforFree",
+                                "DB6EA5DB.CyberLinkMediaSuiteEssentials",
+                                "DolbyLaboratories.DolbyAccess",
+                                "DolbyLaboratories.DolbyAccess",
+                                "Drawboard.DrawboardPDF",
+                                "Facebook.Facebook",
+                                "Fitbit.FitbitCoach",
+                                "Flipboard.Flipboard",
+                                "GAMELOFTSA.Asphalt8Airborne",
+                                "KeeperSecurityInc.Keeper",
+                                "NORDCURRENT.COOKINGFEVER",
+                                "PandoraMediaInc.29680B314EFC2",
+                                "Playtika.CaesarsSlotsFreeCasino",
+                                "ShazamEntertainmentLtd.Shazam",
+                                "SlingTVLLC.SlingTV",
+                                "SpotifyAB.SpotifyMusic",
+                                "ThumbmunkeysLtd.PhototasticCollage",
+                                "TuneIn.TuneInRadio",
+                                "WinZipComputing.WinZipUniversal",
+                                "XINGAG.XING",
+                                "flaregamesGmbH.RoyalRevolt2",
+                                "king.com.*",
+                                "king.com.BubbleWitch3Saga",
+                                "king.com.CandyCrushSaga",
+                                "king.com.CandyCrushSodaSaga" };
+
+            string shellCommand = "";
+            foreach (string str in apps)
+            {
+                shellCommand += "Get-AppxPackage " + str + " | Remove-AppxPackage\n"; 
+            }
 
             Process.Start("Powershell.exe", shellCommand);
         }
