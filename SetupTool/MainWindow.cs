@@ -154,10 +154,6 @@ namespace SetupTool
             }
         }
 
-        private void buttonCheckRecommendedSoftware_Click(object sender, EventArgs e)
-        {
-            //Currently not used
-        }
 
         private void buttonUncheckAllSoftware_Click(object sender, EventArgs e)
         {
@@ -165,9 +161,10 @@ namespace SetupTool
                 checkedListBoxApps.SetItemCheckState(i, CheckState.Unchecked);
         }
 
-        private void buttonCheckRecommendedSettings_Click(object sender, EventArgs e)
+        private void buttonCheckAllSettings_Click(object sender, EventArgs e)
         {
-            //Currently not used
+            for (int i = 0; i < checkedListBoxSettings.Items.Count; i++)
+                checkedListBoxSettings.SetItemCheckState(i, CheckState.Checked);
         }
 
         private void buttonUncheckAllSettings_Click(object sender, EventArgs e)
@@ -421,5 +418,6 @@ namespace SetupTool
             Process regeditProcess = Process.Start("regedit.exe", "/s DisableSettingsCloudsync.reg");
             regeditProcess.WaitForExit();
         }
+
     }
 }

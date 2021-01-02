@@ -42,6 +42,7 @@
             this.buttonAddPackage = new System.Windows.Forms.Button();
             this.buttonUncheckAllSoftware = new System.Windows.Forms.Button();
             this.buttonUncheckAllSettings = new System.Windows.Forms.Button();
+            this.buttonCheckAllSettings = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -181,11 +182,22 @@
             this.buttonUncheckAllSettings.UseVisualStyleBackColor = true;
             this.buttonUncheckAllSettings.Click += new System.EventHandler(this.buttonUncheckAllSettings_Click);
             // 
+            // buttonCheckAllSettings
+            // 
+            this.buttonCheckAllSettings.Location = new System.Drawing.Point(608, 333);
+            this.buttonCheckAllSettings.Name = "buttonCheckAllSettings";
+            this.buttonCheckAllSettings.Size = new System.Drawing.Size(75, 23);
+            this.buttonCheckAllSettings.TabIndex = 11;
+            this.buttonCheckAllSettings.Text = "Check all";
+            this.buttonCheckAllSettings.UseVisualStyleBackColor = true;
+            this.buttonCheckAllSettings.Click += new System.EventHandler(this.buttonCheckAllSettings_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(770, 432);
+            this.Controls.Add(this.buttonCheckAllSettings);
             this.Controls.Add(this.buttonUncheckAllSettings);
             this.Controls.Add(this.buttonUncheckAllSoftware);
             this.Controls.Add(this.buttonAddPackage);
@@ -223,6 +235,7 @@
         private System.Windows.Forms.Button buttonAddPackage;
         private System.Windows.Forms.Button buttonUncheckAllSoftware;
         private System.Windows.Forms.Button buttonUncheckAllSettings;
+        private System.Windows.Forms.Button buttonCheckAllSettings;
     }
 }
 
