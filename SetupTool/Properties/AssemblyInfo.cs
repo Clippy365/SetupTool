@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("SetupTool")]
-[assembly: AssemblyCopyright("Copyright © 2020 Timo Vogel")]
+[assembly: AssemblyCopyright("Copyright © 2021 Timo Vogel")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
