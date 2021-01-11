@@ -38,7 +38,7 @@ namespace SetupTool
             string[] checkedItems = checkedListBoxSettings.CheckedItems.Cast<string>().ToArray();
             for (int i = 0; i < checkedItems.Length; i++)
             {
-                checkedItems[i] = checkedItems[i].Replace(" ", "_"); //Actually the way Microsoft does this
+                checkedItems[i] = checkedItems[i].Replace(" ", "_");
                 checkedItems[i] = checkedItems[i].Replace("®", "");
                 checkedItems[i] = checkedItems[i].Replace("'", "");
                 
@@ -195,7 +195,9 @@ namespace SetupTool
             foreach (string str in checkedPackages)
                 chocolateyCommand += str + " ";
 
-            chocolateyCommand = "choco install " + chocolateyCommand + "-y";
+            //Using full path, so no restart of SetupTool is necessary
+            string choco = Environment.ExpandEnvironmentVariables("%SYSTEMDRIVE%") + @"\ProgramData\chocolatey\bin\choco.exe";
+            chocolateyCommand = choco + " install " + chocolateyCommand + "-y";
 
             executeShellCommand(chocolateyCommand);
         }
@@ -221,29 +223,22 @@ namespace SetupTool
         {
             //This command is from chocolatey.org. It runs an installer using the PowerShell
             string installCommand = "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))";
-            
+
             executeShellCommand(installCommand);
-            Application.Restart(); //TODO: Test
         }
 
         /// <summary>
         /// Executes a command on a PowerShell
         /// </summary>
         /// <param name="command">The command to be executed</param>
+        /// <param name="FileName">The process name to start (default is powershell.exe)</param>
         private void executeShellCommand(string command)
         {
-            Process shell = new Process();
-            shell.StartInfo.FileName = "powershell.exe";
-            shell.StartInfo.RedirectStandardInput = true;
-            shell.StartInfo.RedirectStandardOutput = false;
-            shell.StartInfo.RedirectStandardError = true;
-            shell.StartInfo.UseShellExecute = false;
-            shell.StartInfo.CreateNoWindow = false;
-            shell.Start();
-
-            shell.StandardInput.WriteLine(command);
-            shell.StandardInput.Flush();
-            shell.StandardInput.Close();
+            var processInfo = new ProcessStartInfo { FileName = "powershell.exe", Arguments = command };
+            using (var process = Process.Start(processInfo))
+            {
+                process.WaitForExit();
+            }
         }
 
 
