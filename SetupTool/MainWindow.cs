@@ -20,7 +20,7 @@ namespace SetupTool
     public partial class MainWindow : Form
     {
         //To map a string in this array (checkbox) to a function, simply name it the same but replace whitepaces with underlines ("_")
-        string[] settings = { "Uninstall OneDrive®", "Uninstall Bloatware", "Change privacy settings to strict", "Disable start menu ads", "Don't show last used files in explorer", "Disable settings cloudsync" };
+        string[] settings = { "Uninstall OneDrive®", "Uninstall Bloatware", "Change privacy settings to strict", "Disable start menu ads", "Don't show last used files in explorer", "Disable settings cloudsync", "Always turn on Numlock", "Show all file extensions", "Show all tray icons" };
 
         public MainWindow()
         {
@@ -69,7 +69,8 @@ namespace SetupTool
                     checkedListBoxApps.Items.Add(de.Key.ToString());
                 }
             }
-            
+
+            Array.Sort(settings);
             checkedListBoxSettings.Items.AddRange(settings);
         }
 
@@ -411,6 +412,34 @@ namespace SetupTool
         public void Disable_settings_cloudsync()
         {
             Process regeditProcess = Process.Start("regedit.exe", "/s DisableSettingsCloudsync.reg");
+            regeditProcess.WaitForExit();
+        }
+
+
+        /// <summary>
+        /// The Numlock key on the numblock of a keyboard will always be on if set
+        /// </summary>
+        public void Always_turn_on_Numlock()
+        {
+            Process regeditProcess = Process.Start("regedit.exe", "/s AlwaysTurnOnNumlock.reg");
+            regeditProcess.WaitForExit();
+        }
+
+        /// <summary>
+        /// Windows does hide file extensions for known filetypes by default. This setting will always show the file extension
+        /// </summary>
+        public void Show_all_file_extensions()
+        {
+            Process regeditProcess = Process.Start("regedit.exe", "/s ShowAllFileExtensions.reg");
+            regeditProcess.WaitForExit();
+        }
+            
+        /// <summary>
+        /// Windows does not show all tray icons by default. This setting will always show all tray icons
+        /// </summary>
+        public void Show_all_tray_icons()
+        {
+            Process regeditProcess = Process.Start("regedit.exe", "/s ShowAllTrayIcons.reg");
             regeditProcess.WaitForExit();
         }
 
