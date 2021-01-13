@@ -20,7 +20,7 @@ namespace SetupTool
     public partial class MainWindow : Form
     {
         //To map a string in this array (checkbox) to a function, simply name it the same but replace whitepaces with underlines ("_")
-        string[] settings = { "Uninstall OneDrive®", "Uninstall Bloatware", "Change privacy settings to strict", "Disable start menu ads", "Don't show last used files in explorer", "Disable settings cloudsync", "Always turn on Numlock", "Show all file extensions", "Show all tray icons" };
+        string[] settings = { "Uninstall OneDrive®", "Uninstall bloatware", "Change privacy settings to strict", "Disable start menu ads", "Don't show last used files in explorer", "Disable settings cloudsync", "Always turn on Numlock", "Show all file extensions", "Show all tray icons", "Disable mouse acceleration" };
 
         public MainWindow()
         {
@@ -440,6 +440,15 @@ namespace SetupTool
         public void Show_all_tray_icons()
         {
             Process regeditProcess = Process.Start("regedit.exe", "/s ShowAllTrayIcons.reg");
+            regeditProcess.WaitForExit();
+        }
+
+        /// <summary>
+        /// Disables the mouse acceleration, which is turned on by default. Regfile from https://gist.github.com/razorenov/ea9e2c85aecf2606009328bd79b6c890#file-mouse_fix-reg
+        /// </summary>
+        public void Disable_mouse_acceleration()
+        {
+            Process regeditProcess = Process.Start("regedit.exe", "/s DisableMouseAcceleration.reg");
             regeditProcess.WaitForExit();
         }
 
