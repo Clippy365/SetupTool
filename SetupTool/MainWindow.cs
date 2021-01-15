@@ -446,11 +446,11 @@ namespace SetupTool
         /// <summary>
         /// Disables the mouse acceleration, which is turned on by default. Regfile from https://gist.github.com/razorenov/ea9e2c85aecf2606009328bd79b6c890#file-mouse_fix-reg
         /// </summary>
-        public void Disable_mouse_acceleration()
-        {
-            Process regeditProcess = Process.Start("regedit.exe", "/s DisableMouseAcceleration.reg");
-            regeditProcess.WaitForExit();
-        }
+        //public void Disable_mouse_acceleration()
+        //{
+        //    Process regeditProcess = Process.Start("regedit.exe", "/s DisableMouseAcceleration.reg");
+        //    regeditProcess.WaitForExit();
+        //}
 
     }
 }
