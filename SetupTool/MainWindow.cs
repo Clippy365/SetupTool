@@ -20,7 +20,7 @@ namespace SetupTool
     public partial class MainWindow : Form
     {
         //To map a string in this array (checkbox) to a function, simply name it the same but replace whitepaces with underlines ("_")
-        string[] settings = { "Uninstall OneDrive®", "Uninstall bloatware", "Change privacy settings to strict", "Disable start menu ads", "Don't show last used files in explorer", "Disable settings cloudsync", "Always turn on Numlock", "Show all file extensions", "Show all tray icons", "Disable mouse acceleration" };
+        string[] settings = { "Uninstall OneDrive®", "Uninstall bloatware", "Change privacy settings to strict", "Disable start menu ads", "Don't show last used files in explorer", "Disable settings cloudsync", "Always turn on numlock", "Show all file extensions", "Show all tray icons", "Disable mouse acceleration" };
 
         public MainWindow()
         {
@@ -273,7 +273,7 @@ namespace SetupTool
         /// <summary>
         /// For now this removes a bunch of preinstalled Apps.
         /// </summary>
-        public void Uninstall_Bloatware()
+        public void Uninstall_bloatware()
         {
             string[] apps = {   // default Windows 10 apps
                                 "Microsoft.3DBuilder",
@@ -419,7 +419,7 @@ namespace SetupTool
         /// <summary>
         /// The Numlock key on the numblock of a keyboard will always be on if set
         /// </summary>
-        public void Always_turn_on_Numlock()
+        public void Always_turn_on_numlock()
         {
             Process regeditProcess = Process.Start("regedit.exe", "/s AlwaysTurnOnNumlock.reg");
             regeditProcess.WaitForExit();
