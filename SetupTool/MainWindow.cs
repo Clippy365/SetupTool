@@ -15,12 +15,14 @@ using System.Collections;
 using System.Diagnostics;
 using Microsoft.Win32;
 
+
+
 namespace SetupTool
 {
     public partial class MainWindow : Form
     {
         //To map a string in this array (checkbox) to a function, simply name it the same but replace whitepaces with underlines ("_")
-        string[] settings = { "Uninstall OneDrive®", "Uninstall bloatware", "Change privacy settings to strict", "Disable start menu ads", "Don't show last used files in explorer", "Disable settings cloudsync", "Always turn on numlock", "Show all file extensions", "Show all tray icons", "Disable mouse acceleration" };
+        string[] settings = { "Uninstall OneDrive®", "Uninstall bloatware", "Change privacy settings to strict", "Disable start menu ads", "Don't show last used files in explorer", "Disable settings cloudsync", "Always turn on numlock", "Show all file extensions", "Show all tray icons", /*"Disable mouse acceleration"*/ };
 
         public MainWindow()
         {
@@ -285,7 +287,7 @@ namespace SetupTool
                                 "Microsoft.BingWeather",
                                 "Microsoft.GamingServices",
                                 "Microsoft.Microsoft3DViewer",
-                                //"Microsoft.MicrosoftOfficeHub",
+                                "Microsoft.MicrosoftOfficeHub",
                                 "Microsoft.MicrosoftPowerBIForWindows",
                                 "Microsoft.MicrosoftSolitaireCollection",
                                 "Microsoft.MinecraftUWP",
@@ -322,6 +324,7 @@ namespace SetupTool
 
                                 // Creators Update apps,
                                 "Microsoft.Microsoft3DViewer",
+                                "Microsoft.MSPaint",
 
                                 // Redstone apps,
                                 "Microsoft.BingFoodAndDrink",
@@ -332,7 +335,7 @@ namespace SetupTool
                                 // Redstone 5 apps,
                                 "Microsoft.MixedReality.Portal",
                                 "Microsoft.ScreenSketch",
-                                "Microsoft.XboxGamingOverlay",
+                                //"Microsoft.XboxGamingOverlay",
                                 "Microsoft.YourPhone",
 
                                 // non-Microsoft,
@@ -374,7 +377,14 @@ namespace SetupTool
                                 "king.com.*",
                                 "king.com.BubbleWitch3Saga",
                                 "king.com.CandyCrushSaga",
-                                "king.com.CandyCrushSodaSaga" };
+                                "king.com.CandyCrushSodaSaga",
+                                //ab hier neu
+                                "SpotifyAB.SpotifyMusic_zpdnekdrzrea0!Spotify",
+                                "A278AB0D.MarchofEmpires_h6adky7gbf63m!App",
+                                "ROBLOXCorporation.ROBLOX_55nm5eh3cm0pr!App",
+                                "828B5831.HiddenCityMysteryofShadows_ytsefhwckbdv6!App",
+                                "1424566A.147190DF3DE79_5byw4zywtsh80!App"
+                              };
 
             string shellCommand = "";
             foreach (string str in apps)
@@ -382,8 +392,12 @@ namespace SetupTool
                 shellCommand += "Get-AppxPackage " + str + " | Remove-AppxPackage\n"; 
             }
 
-            Process.Start("Powershell.exe", shellCommand);
+            executeShellCommand(shellCommand);
+
+            cleanUpStartMenu();
+
         }
+    
 
         /// <summary>
         /// For now this just changes a bunch of registry settings without any granularity. May be changed in the future
@@ -452,5 +466,18 @@ namespace SetupTool
         //    regeditProcess.WaitForExit();
         //}
 
+        public void cleanUpStartMenu()
+        {
+            try
+            { Registry.CurrentUser.DeleteSubKeyTree(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\CloudStore\Store\Cache\DefaultAccount", true); }
+
+            catch(Exception ex)
+            { MessageBox.Show(ex.Message); }
+
+            Process regeditProcess = Process.Start("regedit.exe", "/s StartMenuLayout.reg");
+            regeditProcess.WaitForExit();
+
+            MessageBox.Show("You will have to log out and log back in, to finish start menu cleanup");
+        }
     }
 }
