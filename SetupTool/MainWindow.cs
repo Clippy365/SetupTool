@@ -404,20 +404,17 @@ namespace SetupTool
         /// </summary>
         public void Change_privacy_settings_to_strict()
         {
-            Process regeditProcess = Process.Start("regedit.exe", "/s ChangePrivacySettingsToStrict.reg");
-            regeditProcess.WaitForExit();
+            ImportRegFile("ChangePrivacySettingsToStrict.reg");
         }
 
         public void Disable_start_menu_ads()
         {
-            Process regeditProcess = Process.Start("regedit.exe", "/s DisableStartMenuAds.reg");
-            regeditProcess.WaitForExit();
+            ImportRegFile("DisableStartMenuAds.reg");
         }
 
         public void Dont_show_last_used_files_in_explorer()
         {
-            Process regeditProcess = Process.Start("regedit.exe", "/s DontShowLastFilesInExplorer.reg");
-            regeditProcess.WaitForExit();
+            ImportRegFile("DontShowLastFilesInExplorer.reg");
         }
 
         /// <summary>
@@ -425,8 +422,7 @@ namespace SetupTool
         /// </summary>
         public void Disable_settings_cloudsync()
         {
-            Process regeditProcess = Process.Start("regedit.exe", "/s DisableSettingsCloudsync.reg");
-            regeditProcess.WaitForExit();
+            ImportRegFile("DisableSettingsCloudsync.reg");
         }
 
 
@@ -435,8 +431,7 @@ namespace SetupTool
         /// </summary>
         public void Always_turn_on_numlock()
         {
-            Process regeditProcess = Process.Start("regedit.exe", "/s AlwaysTurnOnNumlock.reg");
-            regeditProcess.WaitForExit();
+            ImportRegFile("AlwaysTurnOnNumlock.reg");
         }
 
         /// <summary>
@@ -444,8 +439,7 @@ namespace SetupTool
         /// </summary>
         public void Show_all_file_extensions()
         {
-            Process regeditProcess = Process.Start("regedit.exe", "/s ShowAllFileExtensions.reg");
-            regeditProcess.WaitForExit();
+            ImportRegFile("ShowAllFileExtensions.reg");
         }
             
         /// <summary>
@@ -453,8 +447,7 @@ namespace SetupTool
         /// </summary>
         public void Show_all_tray_icons()
         {
-            Process regeditProcess = Process.Start("regedit.exe", "/s ShowAllTrayIcons.reg");
-            regeditProcess.WaitForExit();
+            ImportRegFile("ShowAllTrayIcons.reg");
         }
 
         /// <summary>
@@ -477,10 +470,20 @@ namespace SetupTool
             catch(Exception ex)
             { MessageBox.Show(ex.Message); }
 
-            Process regeditProcess = Process.Start("regedit.exe", "/s StartMenuLayout.reg");
-            regeditProcess.WaitForExit();
+            ImportRegFile("StartMenuLayout.reg");
 
             MessageBox.Show("You will have to log out and log back in, to finish start menu cleanup");
+        }
+
+
+        /// <summary>
+        /// Imports a .reg file and sets the corresponding registry keys and values
+        /// </summary>
+        /// <param name="regFile">The reg file to merge with the Windows registry. Has to end with ".reg"</param>
+        public void ImportRegFile(string regFile)
+        {
+            Process regeditProcess = Process.Start("regedit.exe", "/s " + regFile);
+            regeditProcess.WaitForExit();
         }
     }
 }
