@@ -1,6 +1,7 @@
 {
   "Adobe Reader DC": "adobereader",
-  "Microsoft Office 2019 Home and Business Retail": "microsoft-office-deployment /64bit /Language MatchOS /Product HomeBusinessRetail /Exclude OneDrive Lync Groove",
+  "Microsoft Office 2016 Home and Business Retail": "microsoft-office-deployment /64bit /Language MatchOS /Product HomeBusinessRetail /Exclude OneDrive Lync Groove",
+  "Microsoft Office 2019 Home and Business Retail": "microsoft-office-deployment /64bit /Language MatchOS /Product HomeBusiness2019Retail /Exclude OneDrive Lync Groove",
   "WinSCP": "winscp",
   "iTunes": "itunes",
   "Autoruns": "autoruns",
