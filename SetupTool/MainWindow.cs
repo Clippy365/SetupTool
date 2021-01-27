@@ -466,6 +466,9 @@ namespace SetupTool
         //    regeditProcess.WaitForExit();
         //}
 
+        /// <summary>
+        /// Imports a start menu tile layout via registry key (Chromium Edge, MS Store and Photos App)
+        /// </summary>
         public void cleanUpStartMenu()
         {
             try
