@@ -482,7 +482,7 @@ namespace SetupTool
         /// <param name="regFile">The reg file to merge with the Windows registry. Has to end with ".reg"</param>
         public void ImportRegFile(string regFile)
         {
-            Process regeditProcess = Process.Start("regedit.exe", "/s " + regFile);
+            Process regeditProcess = Process.Start("regedit.exe", "/s RegFiles\\" + regFile);
             regeditProcess.WaitForExit();
         }
     }
