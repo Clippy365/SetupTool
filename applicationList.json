@@ -41,7 +41,7 @@
   "VLC Media Player": "vlc",
   "Foxit PDF Reader": "foxitreader",
   "Speccy": "speccy",
-  "Microsoft Office 2019 ProPlus Retail": "microsoft-office-deployment /64bit /Language MatchOS /Product ProPlusRetail /Exclude OneDrive Lync Groove",
+  "Microsoft Office 2016 ProPlus Retail": "microsoft-office-deployment /64bit /Language MatchOS /Product ProPlusRetail /Exclude OneDrive Lync Groove",
   "Unchecky": "unchecky",
   "Epic Games Launcher": "epicgameslauncher",
   "WinRAR": "winrar"
