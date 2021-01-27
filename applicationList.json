@@ -7,7 +7,6 @@
   "Autoruns": "autoruns",
   "Visual Studio 2019 Community Installer": "visualstudio2019community",
   "CCleaner": "ccleaner",
-  "Microsoft Office365 Personal": "microsoft-office-deployment /64bit /Language MatchOS /Product Personal2019Retail /Exclude OneDrive Lync Groove",
   "Google Chrome": "googlechrome",
   "Enpass": "enpass.install",
   "Python3": "python3",
