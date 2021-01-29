@@ -1,4 +1,4 @@
-![Screenshot of SetupTool](https://postimg.cc/K1j7fcn9)
+[![Screenshot](https://i.postimg.cc/x1ys0cqS/Unbenannt.png)](https://postimg.cc/K1j7fcn9)
 
 This tool is used to set up your Windows 10 installation. By clicking the checkboxes on the left hand side, you can choose which software it will install. You can also edit this list and add new packages as long as they are in the [chocolatey repository](https://chocolatey.org/packages). In the background it will use the chocolatey package manager for installing software. You can also change some important Windows settings with it by checking the checkboxes on the right hand side. It can for example disable windows telemetry, peer-to-peer updates or remove useless pre-installed apps like candy crush or groove music.
 
