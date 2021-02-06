@@ -24,7 +24,7 @@ namespace SetupTool
         private int ttIndex = 0;
 
         // This string array has to be in the same order as the elements in checkedListBoxSettings in order to show the correct ToolTip
-        private string[] ToolTipCaptions = { "Always turns on the NumLock key on your keyboard. Turned off by default", "Turn off certain settings like Windows telemetry, advertisements over Bluetooth or syncing clipboard contents via cloud. Turned on by default", "Only applies if you are logged in with an online account and turns off cloud synchronization of settings like Desktop background, etc. Turned on by default", "Disables ads in the Windows start menu. Turned on by default (except Windows 10 Enterprise)", "Turns off showing last used files and folder in file explorer. Turned on by default", /* "Installs and enables the Windows Subsystem for Linux version 2. Not installed by default", */ "Shows all file extensions (like *.pdf), no matter if the file extension is known or not. Turned off by default", "Always show all tray icons in the task bar. Turned off by default", "Uninstall apps like groove music or Candy Crush", "Uninstall OneDrive®" };
+        private string[] ToolTipCaptions = { "Always turns on the NumLock key on your keyboard. Turned off by default", "Turn off certain settings like Windows telemetry, advertisements over Bluetooth or syncing clipboard contents via cloud. Turned on by default", "Only applies if you are logged in with an online account and turns off cloud synchronization of settings like Desktop background, etc. Turned on by default", "Disables ads in the Windows start menu. Turned on by default (except Windows 10 Enterprise)", "Turns off showing last used files and folder in file explorer. Turned on by default", "Installs and enables the Windows Subsystem for Linux version 2. Requires a reboot. Not installed by default", "Shows all file extensions (like *.pdf), no matter if the file extension is known or not. Turned off by default", "Always show all tray icons in the task bar. Turned off by default", "Uninstall apps like groove music or Candy Crush", "Uninstall OneDrive®" };
 
         public MainWindow()
         {
@@ -501,6 +501,25 @@ namespace SetupTool
                     toolTip1.SetToolTip(checkedListBoxSettings, ToolTipCaptions[ttIndex].ToString());
                 }
             }
+        }
+
+        /// <summary>
+        /// Installs and enables the Windows Subsystem for Linux version 2
+        /// </summary>
+        public void Enable_WSL2()
+        {
+            // Install WSL1
+            executeShellCommand("dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart");
+            
+            // Install Virtual machine platform
+            executeShellCommand("dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart");
+
+            // Install the Linux kernel update package
+            executeShellCommand("(New-Object System.Net.WebClient).DownloadFile('https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi', 'wsl_update_x64.msi')");
+            executeShellCommand("msiexec /i wsl_update_x64.msi /passive");
+
+            // Set WSL 2 as default version
+            executeShellCommand("wsl --set-default-version 2");
         }
     }
 }

@@ -101,6 +101,7 @@
             "Disable settings cloudsync",
             "Disable start menu ads",
             "Don\'t show last used files in file explorer",
+            "Enable WSL2",
             "Show all file extensions",
             "Show all tray icons",
             "Uninstall bloatware",
