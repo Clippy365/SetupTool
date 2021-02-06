@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.checkedListBoxApps = new System.Windows.Forms.CheckedListBox();
             this.buttonStart = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -43,6 +44,7 @@
             this.buttonUncheckAllSoftware = new System.Windows.Forms.Button();
             this.buttonUncheckAllSettings = new System.Windows.Forms.Button();
             this.buttonCheckAllSettings = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -93,11 +95,22 @@
             // 
             this.checkedListBoxSettings.CheckOnClick = true;
             this.checkedListBoxSettings.FormattingEnabled = true;
+            this.checkedListBoxSettings.Items.AddRange(new object[] {
+            "Always turn on numlock",
+            "Change privacy settings to strict",
+            "Disable settings cloudsync",
+            "Disable start menu ads",
+            "Don\'t show last used files in file explorer",
+            "Show all file extensions",
+            "Show all tray icons",
+            "Uninstall bloatware",
+            "Uninstall OneDrive®"});
             this.checkedListBoxSettings.Location = new System.Drawing.Point(6, 19);
             this.checkedListBoxSettings.Name = "checkedListBoxSettings";
             this.checkedListBoxSettings.Size = new System.Drawing.Size(363, 259);
             this.checkedListBoxSettings.Sorted = true;
             this.checkedListBoxSettings.TabIndex = 0;
+            this.checkedListBoxSettings.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ShowToolTip);
             // 
             // menuStrip1
             // 
@@ -236,6 +249,7 @@
         private System.Windows.Forms.Button buttonUncheckAllSoftware;
         private System.Windows.Forms.Button buttonUncheckAllSettings;
         private System.Windows.Forms.Button buttonCheckAllSettings;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 

@@ -21,8 +21,10 @@ namespace SetupTool
 {
     public partial class MainWindow : Form
     {
-        //To map a string in this array (checkbox) to a function, simply name it the same but replace whitepaces with underlines ("_")
-        string[] settings = { "Uninstall OneDrive®", "Uninstall bloatware", "Change privacy settings to strict", "Disable start menu ads", "Don't show last used files in explorer", "Disable settings cloudsync", "Always turn on numlock", "Show all file extensions", "Show all tray icons", /*"Disable mouse acceleration"*/ };
+        private int ttIndex = 0;
+
+        // This string array has to be in the same order as the elements in checkedListBoxSettings in order to show the correct ToolTip
+        private string[] ToolTipCaptions = { "Always turns on the NumLock key on your keyboard. Turned off by default", "Turn off certain settings like Windows telemetry, advertisements over Bluetooth or syncing clipboard contents via cloud. Turned on by default", "Only applies if you are logged in with an online account and turns off cloud synchronization of settings like Desktop background, etc. Turned on by default", "Disables ads in the Windows start menu. Turned on by default (except Windows 10 Enterprise)", "Turns off showing last used files and folder in file explorer. Turned on by default", /* "Installs and enables the Windows Subsystem for Linux version 2. Not installed by default", */ "Shows all file extensions (like *.pdf), no matter if the file extension is known or not. Turned off by default", "Always show all tray icons in the task bar. Turned off by default", "Uninstall apps like groove music or Candy Crush", "Uninstall OneDrive®" };
 
         public MainWindow()
         {
@@ -72,8 +74,6 @@ namespace SetupTool
                 }
             }
 
-            Array.Sort(settings);
-            checkedListBoxSettings.Items.AddRange(settings);
         }
 
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -450,6 +450,7 @@ namespace SetupTool
             ImportRegFile("ShowAllTrayIcons.reg");
         }
 
+
         /// <summary>
         /// Disables the mouse acceleration, which is turned on by default. Regfile from https://gist.github.com/razorenov/ea9e2c85aecf2606009328bd79b6c890#file-mouse_fix-reg
         /// </summary>
@@ -484,6 +485,22 @@ namespace SetupTool
         {
             Process regeditProcess = Process.Start("regedit.exe", "/s RegFiles\\" + regFile);
             regeditProcess.WaitForExit();
+        }
+
+
+        /// <summary>
+        /// Shows a tooltip for every checkedListBoxItem when hovered over with the mouse
+        /// </summary>
+        private void ShowToolTip(object sender, MouseEventArgs e)
+        {
+            if (ttIndex != this.checkedListBoxSettings.IndexFromPoint(e.Location))
+            {
+                ttIndex = checkedListBoxSettings.IndexFromPoint(checkedListBoxSettings.PointToClient(MousePosition));
+                if (ttIndex > -1)
+                {
+                    toolTip1.SetToolTip(checkedListBoxSettings, ToolTipCaptions[ttIndex].ToString());
+                }
+            }
         }
     }
 }
