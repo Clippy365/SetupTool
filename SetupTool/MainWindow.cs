@@ -22,6 +22,7 @@ namespace SetupTool
     public partial class MainWindow : Form
     {
         private int ttIndex = 0;
+        private bool checkedForFirefox = false, checkedForChrome = false;
 
         // This string array has to be in the same order as the elements in checkedListBoxSettings in order to show the correct ToolTip
         private string[] ToolTipCaptions = { "Always turns on the NumLock key on your keyboard. Turned off by default", "Turn off certain settings like Windows telemetry, advertisements over Bluetooth or syncing clipboard contents via cloud. Turned on by default", "Only applies if you are logged in with an online account and turns off cloud synchronization of settings like Desktop background, etc. Turned on by default", "Disables ads in the Windows start menu. Turned on by default (except Windows 10 Enterprise)", "Turns off showing last used files and folder in file explorer. Turned on by default", "Installs and enables the Windows Subsystem for Linux version 2. Requires a reboot. Not installed by default", "Shows all file extensions (like *.pdf), no matter if the file extension is known or not. Turned off by default", "Always show all tray icons in the task bar. Turned off by default", "Uninstall apps like groove music or Candy Crush", "Uninstall OneDrive®" };
@@ -64,13 +65,13 @@ namespace SetupTool
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Hashtable list = readApplicationList();
+            SortedList<string, string> list = readApplicationList();
 
             if (list != null)
             {
-                foreach (DictionaryEntry de in list)
+                foreach (KeyValuePair<string, string> kvp in list)
                 {
-                    checkedListBoxApps.Items.Add(de.Key.ToString());
+                    checkedListBoxApps.Items.Add(kvp.Key.ToString());
                 }
             }
 
@@ -100,7 +101,7 @@ namespace SetupTool
         /// </summary>
         /// <returns>An hashtable object with all key/value pairs inside "applicationlist.json"</returns>
 
-        private Hashtable readApplicationList()
+        private SortedList<string, string> readApplicationList()
         {
             string applicationList = "applicationList.json";
             string fullPath = System.IO.Directory.GetCurrentDirectory() + "\\" + applicationList;
@@ -108,7 +109,7 @@ namespace SetupTool
             FileInfo fi = new FileInfo(applicationList);
             if (fi.Exists)
             {
-                Hashtable list = JsonConvert.DeserializeObject<Hashtable>(File.ReadAllText(fullPath));
+                SortedList<string, string> list = JsonConvert.DeserializeObject<SortedList<string, string>>(File.ReadAllText(fullPath));
                 return list;
             }
 
@@ -120,7 +121,7 @@ namespace SetupTool
         /// Creates the file "applicationList.json" or overwrites an existing one
         /// </summary>
         /// <param name="ht">The Hashtable object that will be written to "applicationList.json"</param>
-        private void writeApplicationList(Hashtable ht)
+        private void writeApplicationList(SortedList<string, string> sl)
         {
             string applicationList = "applicationList.json";
             string fullPath = System.IO.Directory.GetCurrentDirectory() + "\\" + applicationList;
@@ -130,7 +131,7 @@ namespace SetupTool
             {
                 try
                 {
-                    string json = JsonConvert.SerializeObject(ht, Formatting.Indented);
+                    string json = JsonConvert.SerializeObject(sl, Formatting.Indented);
                     System.IO.File.WriteAllText(fullPath, json);
                 }
 
@@ -147,7 +148,7 @@ namespace SetupTool
                                    
             if (itemsToDelete != null)
             {
-                Hashtable list = readApplicationList();
+                SortedList<string, string> list = readApplicationList();
                 foreach (string str in itemsToDelete)
                 {
                     list.Remove(str);
@@ -183,7 +184,7 @@ namespace SetupTool
         private void installPackages()
         {
             string[] checkedElements = checkedListBoxApps.CheckedItems.Cast<String>().ToArray();
-            Hashtable packagesApplicationList = readApplicationList();
+            SortedList<string, string> packagesApplicationList = readApplicationList();
             List<string> checkedPackages = new List<string>();
 
             if (checkedElements.Length < 1)
@@ -191,12 +192,23 @@ namespace SetupTool
 
             for (int i=0; i < checkedElements.Count<string>(); i++)
             {
-                checkedPackages.Add(packagesApplicationList[checkedElements[i]].ToString());
+                try { checkedPackages.Add(packagesApplicationList[checkedElements[i]].ToString()); }
+                catch(Exception ex) { }
             }
 
             string chocolateyCommand = "";
             foreach (string str in checkedPackages)
                 chocolateyCommand += str + " ";
+            
+            // Add Adblock Plus to Chrome and Firefox if checked
+            int ffindex = checkedListBoxApps.Items.IndexOf("Mozilla Firefox");
+            int chrindex = checkedListBoxApps.Items.IndexOf("Google Chrome");
+            if (checkedListBoxApps.GetItemChecked(ffindex+1))
+                chocolateyCommand += "adblockplus-firefox ";
+
+            if (checkedListBoxApps.GetItemChecked(chrindex+1))
+                chocolateyCommand += "adblockpluschrome ";
+
 
             //Using full path, so no restart of SetupTool is necessary
             string choco = Environment.ExpandEnvironmentVariables("%SYSTEMDRIVE%") + @"\ProgramData\chocolatey\bin\choco.exe";
@@ -412,7 +424,7 @@ namespace SetupTool
             ImportRegFile("DisableStartMenuAds.reg");
         }
 
-        public void Dont_show_last_used_files_in_explorer()
+        public void Dont_show_last_used_files_in_file_explorer()
         {
             ImportRegFile("DontShowLastFilesInExplorer.reg");
         }
@@ -520,6 +532,41 @@ namespace SetupTool
 
             // Set WSL 2 as default version
             executeShellCommand("wsl --set-default-version 2");
+        }
+
+        
+        /// <summary>
+        /// Checks if Chrome or Firefox is selected and adds the option to add Adblock Plus if so
+        /// </summary>
+        public void checkForChromeOrFirefox()
+        {
+
+            if (!checkedForFirefox && checkedListBoxApps.CheckedItems.Contains("Mozilla Firefox"))
+            {
+                int index = checkedListBoxApps.Items.IndexOf("Mozilla Firefox");
+                checkedListBoxApps.Items.Insert(index + 1, "    Adblock Plus for Mozilla Firefox");
+                //checkedListBoxApps.Items.Insert(index + 2, "    Block Cookie banners");
+                checkedForFirefox = true;
+            }
+
+            if (!checkedForChrome && checkedListBoxApps.CheckedItems.Contains("Google Chrome"))
+            {
+                int index = checkedListBoxApps.Items.IndexOf("Google Chrome");
+                checkedListBoxApps.Items.Insert(index + 1, "    Adblock Plus for Google Chrome");
+                //checkedListBoxApps.Items.Insert(index + 2, "    Block Cookie banners");
+                checkedForChrome = true;
+            }
+
+        }
+
+        private void checkedListBoxApps_Click(object sender, ItemCheckEventArgs e)
+        {
+            //checkForChromeOrFirefox();
+        }
+
+        private void checkedListBoxApps_Click(object sender, EventArgs e)
+        {
+            checkForChromeOrFirefox();
         }
     }
 }

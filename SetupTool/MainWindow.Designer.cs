@@ -57,8 +57,9 @@
             this.checkedListBoxApps.Location = new System.Drawing.Point(6, 19);
             this.checkedListBoxApps.Name = "checkedListBoxApps";
             this.checkedListBoxApps.Size = new System.Drawing.Size(363, 259);
-            this.checkedListBoxApps.Sorted = true;
             this.checkedListBoxApps.TabIndex = 0;
+            this.checkedListBoxApps.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxApps_Click);
+            this.checkedListBoxApps.SelectedIndexChanged += new System.EventHandler(this.checkedListBoxApps_Click);
             // 
             // buttonStart
             // 
