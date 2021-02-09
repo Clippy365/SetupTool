@@ -22,7 +22,7 @@ namespace SetupTool
     public partial class MainWindow : Form
     {
         private int ttIndex = 0;
-        private bool checkedForFirefox = false, checkedForChrome = false;
+        private bool checkedForFirefox = false;
 
         // This string array has to be in the same order as the elements in checkedListBoxSettings in order to show the correct ToolTip
         private string[] ToolTipCaptions = { "Always turns on the NumLock key on your keyboard. Turned off by default", "Turn off certain settings like Windows telemetry, advertisements over Bluetooth or syncing clipboard contents via cloud. Turned on by default", "Only applies if you are logged in with an online account and turns off cloud synchronization of settings like Desktop background, etc. Turned on by default", "Disables ads in the Windows start menu. Turned on by default (except Windows 10 Enterprise)", "Turns off showing last used files and folder in file explorer. Turned on by default", "Installs and enables the Windows Subsystem for Linux version 2. Requires a reboot. Not installed by default", "Shows all file extensions (like *.pdf), no matter if the file extension is known or not. Turned off by default", "Always show all tray icons in the task bar. Turned off by default", "Uninstall apps like groove music or Candy Crush", "Uninstall OneDrive®" };
@@ -199,22 +199,21 @@ namespace SetupTool
             string chocolateyCommand = "";
             foreach (string str in checkedPackages)
                 chocolateyCommand += str + " ";
-            
-            // Add Adblock Plus to Chrome and Firefox if checked
+
+            if (!string.IsNullOrEmpty(chocolateyCommand))
+            {
+                //Using full path, so no restart of SetupTool is necessary
+                string choco = Environment.ExpandEnvironmentVariables("%SYSTEMDRIVE%") + @"\ProgramData\chocolatey\bin\choco.exe";
+                chocolateyCommand = choco + " install " + chocolateyCommand + "-y";
+                executeShellCommand(chocolateyCommand);
+            }
+
+            // Add Adblock Plus to Firefox if checked (Chrome doesn't support extension sideloading)
             int ffindex = checkedListBoxApps.Items.IndexOf("Mozilla Firefox");
-            int chrindex = checkedListBoxApps.Items.IndexOf("Google Chrome");
-            if (checkedListBoxApps.GetItemChecked(ffindex+1))
-                chocolateyCommand += "adblockplus-firefox ";
+            string sysdrive = System.Environment.ExpandEnvironmentVariables("%SYSTEMDRIVE%");
+            if (checkedListBoxApps.GetItemChecked(ffindex + 1))
+                executeShellCommand(sysdrive + @"\Program Files\Mozilla Firefox\firefox.exe https://addons.mozilla.org/firefox/downloads/latest/1865/addon-1865-latest.xpi");
 
-            if (checkedListBoxApps.GetItemChecked(chrindex+1))
-                chocolateyCommand += "adblockpluschrome ";
-
-
-            //Using full path, so no restart of SetupTool is necessary
-            string choco = Environment.ExpandEnvironmentVariables("%SYSTEMDRIVE%") + @"\ProgramData\chocolatey\bin\choco.exe";
-            chocolateyCommand = choco + " install " + chocolateyCommand + "-y";
-
-            executeShellCommand(chocolateyCommand);
         }
 
         /// <summary>
@@ -538,7 +537,7 @@ namespace SetupTool
         /// <summary>
         /// Checks if Chrome or Firefox is selected and adds the option to add Adblock Plus if so
         /// </summary>
-        public void checkForChromeOrFirefox()
+        public void checkForFirefox()
         {
 
             if (!checkedForFirefox && checkedListBoxApps.CheckedItems.Contains("Mozilla Firefox"))
@@ -547,14 +546,6 @@ namespace SetupTool
                 checkedListBoxApps.Items.Insert(index + 1, "    Adblock Plus for Mozilla Firefox");
                 //checkedListBoxApps.Items.Insert(index + 2, "    Block Cookie banners");
                 checkedForFirefox = true;
-            }
-
-            if (!checkedForChrome && checkedListBoxApps.CheckedItems.Contains("Google Chrome"))
-            {
-                int index = checkedListBoxApps.Items.IndexOf("Google Chrome");
-                checkedListBoxApps.Items.Insert(index + 1, "    Adblock Plus for Google Chrome");
-                //checkedListBoxApps.Items.Insert(index + 2, "    Block Cookie banners");
-                checkedForChrome = true;
             }
 
         }
@@ -566,7 +557,7 @@ namespace SetupTool
 
         private void checkedListBoxApps_Click(object sender, EventArgs e)
         {
-            checkForChromeOrFirefox();
+            checkForFirefox();
         }
     }
 }
