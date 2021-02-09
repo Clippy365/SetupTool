@@ -311,7 +311,7 @@ namespace SetupTool
                                 "Microsoft.Wallet",
                                 "Microsoft.WindowsAlarms",
                                 //"Microsoft.WindowsCamera",
-                                //"microsoft.windowscommunicationsapps",
+                                "microsoft.windowscommunicationsapps",
                                 "Microsoft.WindowsMaps",
                                 "Microsoft.WindowsPhone",
                                 "Microsoft.WindowsSoundRecorder",
