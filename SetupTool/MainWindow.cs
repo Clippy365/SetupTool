@@ -94,6 +94,7 @@ namespace SetupTool
             addp.ShowDialog();
             if(addp.displayName != "" && addp.packageName != "")
                 checkedListBoxApps.Items.Add(addp.displayName);
+            checkedListBoxApps.Sorted = true;
         }
 
         /// <summary>
@@ -193,7 +194,7 @@ namespace SetupTool
             for (int i=0; i < checkedElements.Count<string>(); i++)
             {
                 try { checkedPackages.Add(packagesApplicationList[checkedElements[i]].ToString()); }
-                catch(Exception ex) { }
+                catch(Exception ex) { MessageBox.Show(ex.Message); }
             }
 
             string chocolateyCommand = "";
