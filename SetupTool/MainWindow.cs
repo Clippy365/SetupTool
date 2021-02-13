@@ -212,7 +212,7 @@ namespace SetupTool
             int ffindex = checkedListBoxApps.Items.IndexOf("Mozilla Firefox");
             string sysdrive = System.Environment.ExpandEnvironmentVariables("%SYSTEMDRIVE%");
             if (checkedListBoxApps.GetItemChecked(ffindex + 1))
-                executeShellCommand(sysdrive + @"\Program Files\Mozilla Firefox\firefox.exe https://addons.mozilla.org/firefox/downloads/latest/1865/addon-1865-latest.xpi");
+                executeShellCommand(sysdrive + @"'\Program Files\Mozilla Firefox\firefox.exe' https://addons.mozilla.org/firefox/downloads/latest/1865/addon-1865-latest.xpi");
 
         }
 
