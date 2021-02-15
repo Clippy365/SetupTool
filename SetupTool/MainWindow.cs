@@ -194,7 +194,7 @@ namespace SetupTool
             for (int i=0; i < checkedElements.Count<string>(); i++)
             {
                 try { checkedPackages.Add(packagesApplicationList[checkedElements[i]].ToString()); }
-                catch(Exception ex) { MessageBox.Show(ex.Message); }
+                catch(Exception ex) { }
             }
 
             string chocolateyCommand = "";
