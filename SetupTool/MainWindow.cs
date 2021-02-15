@@ -209,12 +209,20 @@ namespace SetupTool
                 executeShellCommand(chocolateyCommand);
             }
 
-            // Add Adblock Plus to Firefox if checked (Chrome doesn't support extension sideloading)
             int ffindex = checkedListBoxApps.Items.IndexOf("Mozilla Firefox");
+            // Add Adblock Plus to Firefox if checked (Chrome doesn't support extension sideloading)
             string sysdrive = System.Environment.ExpandEnvironmentVariables("%SYSTEMDRIVE%");
             if (checkedListBoxApps.GetItemChecked(ffindex + 1))
                 executeShellCommand(sysdrive + @"'\Program Files\Mozilla Firefox\firefox.exe' https://addons.mozilla.org/firefox/downloads/latest/1865/addon-1865-latest.xpi");
+            
+            // Add IdontCareAboutCookies to Firefox if checked (Chrome doesn't support extension sideloading)
+            if (checkedListBoxApps.GetItemChecked(ffindex + 2))
+                executeShellCommand(sysdrive + @"'\Program Files\Mozilla Firefox\firefox.exe' https://addons.mozilla.org/firefox/downloads/file/3707490/i_dont_care_about_cookies-3.2.7-an+fx.xpi"); ;
 
+            // Add Cookie AutoDelete to Firefox if checked (Chrome doesn't support extension sideloading)
+            if (checkedListBoxApps.GetItemChecked(ffindex + 3))
+                executeShellCommand(sysdrive + @"'\Program Files\Mozilla Firefox\firefox.exe' https://addons.mozilla.org/firefox/downloads/file/3711829/cookie_autodelete-3.6.0-an+fx.xpi");
+        
         }
 
         /// <summary>
@@ -545,7 +553,8 @@ namespace SetupTool
             {
                 int index = checkedListBoxApps.Items.IndexOf("Mozilla Firefox");
                 checkedListBoxApps.Items.Insert(index + 1, "    Adblock Plus for Mozilla Firefox");
-                //checkedListBoxApps.Items.Insert(index + 2, "    Block Cookie banners");
+                checkedListBoxApps.Items.Insert(index + 2, "    I don't care about cookies");
+                checkedListBoxApps.Items.Insert(index + 3, "    Cookie Autodelete");
                 checkedForFirefox = true;
             }
 
