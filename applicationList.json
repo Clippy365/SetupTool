@@ -42,6 +42,7 @@
   "PDF24": "pdf24",
   "Mozilla Firefox": "firefox",
   "Microsoft Office 2016 ProPlus Retail": "microsoft-office-deployment /64bit /Language MatchOS /Product ProPlusRetail /Exclude OneDrive Lync Groove",
+  "Microsoft Office 2016 ProPlus Retail (only Word, Excel, PowerPoint)": "microsoft-office-deployment /64bit /Language MatchOS /Product ProPlusRetail /Exclude OneDrive Lync Groove Access Skype Outlook OneNote Publisher",
   "VLC Media Player": "vlc",
   "Foxit PDF Reader": "foxitreader",
   "Speccy": "speccy",
