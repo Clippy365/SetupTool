@@ -11,6 +11,9 @@ After you "git cloned" it or just downloaded the zip file (which is more common 
 ## Example application list
 By default there is an example applicationList.json with some common software packages listed. You can edit it to fit your needs, or just delete it and create your own one from within the SetupTool GUI.
 
+## Virustotal results
+1/69 antivirus engines flagged this program as malicious (i don't kow why). See the results [here](https://www.virustotal.com/gui/file/1ad6a66fd4f6c968a5e174d24fe0fca6403f3a305bdc6ab99cfde4d49edb0cf2/detection). Don't hesitate to check it yourself!
+
 
 ## Donation
 If you like this software tool, you can consider a donation via PayPal. Here's the link:
