@@ -284,7 +284,7 @@ namespace SetupTool
                 p.Kill();
 
             //Remove OneDrive link from file explorer
-            ImportRegFile("HideOneDriveFromExplorer");
+            ImportRegFile("RemoveOneDriveLinkFromExplorer");
 
             //Remove OneDrive folder from home directory
             string HomeFolder = Environment.ExpandEnvironmentVariables("%USERPROFILE%");
