@@ -283,6 +283,17 @@ namespace SetupTool
             foreach (Process p in OneDriveProcesses)
                 p.Kill();
 
+            //Remove OneDrive link from file explorer
+            ImportRegFile("HideOneDriveFromExplorer");
+
+            //Remove OneDrive folder from home directory
+            string HomeFolder = Environment.ExpandEnvironmentVariables("%USERPROFILE%");
+            DirectoryInfo dir = new DirectoryInfo(HomeFolder + @"\OneDrive");
+            if(dir.Exists)
+            {
+                setAttributesNormal(dir);
+                dir.Delete(true);
+            }
 
             //Remove OneDrive with OneDriveSetup.exe
             Process oneDriveSetup = new Process();
@@ -290,6 +301,17 @@ namespace SetupTool
             oneDriveSetup.StartInfo.Arguments = "/uninstall";
             oneDriveSetup.Start();
 
+        }
+
+
+        /// <summary>
+        /// Sets all file attributes in a folder to FileAttributes.Normal recursively
+        /// </summary>
+        /// <param name="info">The directory to apply the FileAttributes to</param>
+        void setAttributesNormal(DirectoryInfo info)
+        {
+            foreach (var subDir in info.GetDirectories()) setAttributesNormal(subDir);
+            foreach (var file in info.GetFiles()) file.Attributes = FileAttributes.Normal;
         }
 
         /// <summary>
