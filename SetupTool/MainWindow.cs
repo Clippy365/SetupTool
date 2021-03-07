@@ -212,10 +212,10 @@ namespace SetupTool
             int ffindex = checkedListBoxApps.Items.IndexOf("Mozilla Firefox");
             if (checkedListBoxApps.GetItemChecked(ffindex))
             {
-                // Add Adblock Plus to Firefox if checked (Chrome doesn't support extension sideloading)
+                // Add uBlock Origin to Firefox if checked (Chrome doesn't support extension sideloading)
                 string sysdrive = System.Environment.ExpandEnvironmentVariables("%SYSTEMDRIVE%");
                 if (checkedListBoxApps.GetItemChecked(ffindex + 1))
-                    executeShellCommand(sysdrive + @"'\Program Files\Mozilla Firefox\firefox.exe' https://addons.mozilla.org/firefox/downloads/latest/1865/addon-1865-latest.xpi");
+                    executeShellCommand(sysdrive + @"'\Program Files\Mozilla Firefox\firefox.exe' https://addons.mozilla.org/firefox/downloads/file/3719054/ublock_origin-1.33.2-an+fx.xpi");
 
                 // Add IdontCareAboutCookies to Firefox if checked (Chrome doesn't support extension sideloading)
                 if (checkedListBoxApps.GetItemChecked(ffindex + 2))
@@ -554,7 +554,7 @@ namespace SetupTool
             if (!checkedForFirefox && checkedListBoxApps.CheckedItems.Contains("Mozilla Firefox"))
             {
                 int index = checkedListBoxApps.Items.IndexOf("Mozilla Firefox");
-                checkedListBoxApps.Items.Insert(index + 1, "    Adblock Plus for Mozilla Firefox");
+                checkedListBoxApps.Items.Insert(index + 1, "    uBlock Origin for Mozilla Firefox");
                 checkedListBoxApps.Items.Insert(index + 2, "    I don't care about cookies");
                 checkedListBoxApps.Items.Insert(index + 3, "    Cookie Autodelete");
                 checkedForFirefox = true;
