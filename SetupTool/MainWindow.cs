@@ -283,24 +283,23 @@ namespace SetupTool
             foreach (Process p in OneDriveProcesses)
                 p.Kill();
 
-            //Remove OneDrive link from file explorer
-            ImportRegFile("RemoveOneDriveLinkFromExplorer");
-
-            //Remove OneDrive folder from home directory
-            string HomeFolder = Environment.ExpandEnvironmentVariables("%USERPROFILE%");
-            DirectoryInfo dir = new DirectoryInfo(HomeFolder + @"\OneDrive");
-            if(dir.Exists)
-            {
-                setAttributesNormal(dir);
-                dir.Delete(true);
-            }
-
             //Remove OneDrive with OneDriveSetup.exe
             Process oneDriveSetup = new Process();
             oneDriveSetup.StartInfo.FileName = oneDriveSetupPath;
             oneDriveSetup.StartInfo.Arguments = "/uninstall";
             oneDriveSetup.Start();
 
+            //Remove OneDrive link from file explorer
+            ImportRegFile("RemoveOneDriveLinkFromExplorer.reg");
+
+            //Remove OneDrive folder from home directory
+            string HomeFolder = Environment.ExpandEnvironmentVariables("%USERPROFILE%");
+            DirectoryInfo dir = new DirectoryInfo(HomeFolder + "\\OneDrive");
+            if(dir.Exists)
+            {
+                setAttributesNormal(dir);
+                dir.Delete(true);
+            }
         }
 
 
@@ -310,7 +309,11 @@ namespace SetupTool
         /// <param name="info">The directory to apply the FileAttributes to</param>
         void setAttributesNormal(DirectoryInfo info)
         {
-            foreach (var subDir in info.GetDirectories()) setAttributesNormal(subDir);
+            info.Attributes = FileAttributes.Normal;
+            foreach (var subDir in info.GetDirectories())
+            {
+                setAttributesNormal(subDir);
+            }
             foreach (var file in info.GetFiles()) file.Attributes = FileAttributes.Normal;
         }
 
@@ -523,9 +526,9 @@ namespace SetupTool
         /// Imports a .reg file and sets the corresponding registry keys and values
         /// </summary>
         /// <param name="regFile">The reg file to merge with the Windows registry. Has to end with ".reg"</param>
-        public void ImportRegFile(string regFile)
+        public void ImportRegFile(string regFile) //Cannot be debugged unless you copy the registry files to the Debug/Release folder
         {
-            Process regeditProcess = Process.Start("regedit.exe", "/s RegFiles\\" + regFile);
+            Process regeditProcess = Process.Start("regedit.exe", @"/s RegFiles\" + regFile);
             regeditProcess.WaitForExit();
         }
 
