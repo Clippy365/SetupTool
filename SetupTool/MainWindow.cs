@@ -553,18 +553,27 @@ namespace SetupTool
         /// </summary>
         public void Enable_WSL2()
         {
-            // Install WSL1
-            executeShellCommand("dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart");
-            
-            // Install Virtual machine platform
-            executeShellCommand("dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart");
+            //TODO: replace with string from Windows 10 2004
+            if (Environment.OSVersion.VersionString == "Microsoft Windows NT 10.0.19043.0")
+            {
+                executeShellCommand("wsl --install");
+            }
 
-            // Install the Linux kernel update package
-            executeShellCommand("(New-Object System.Net.WebClient).DownloadFile('https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi', 'wsl_update_x64.msi')");
-            executeShellCommand("msiexec /i wsl_update_x64.msi /passive");
+            else 
+            {
+                // Install WSL1
+                executeShellCommand("dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart");
 
-            // Set WSL 2 as default version
-            executeShellCommand("wsl --set-default-version 2");
+                // Install Virtual machine platform
+                executeShellCommand("dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart");
+
+                // Install the Linux kernel update package
+                executeShellCommand("(New-Object System.Net.WebClient).DownloadFile('https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi', 'wsl_update_x64.msi')");
+                executeShellCommand("msiexec /i wsl_update_x64.msi /passive");
+
+                // Set WSL 2 as default version
+                executeShellCommand("wsl --set-default-version 2");
+            }
         }
 
         
