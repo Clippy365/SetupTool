@@ -212,18 +212,18 @@ namespace SetupTool
             int ffindex = checkedListBoxApps.Items.IndexOf("Mozilla Firefox");
             if (checkedListBoxApps.GetItemChecked(ffindex))
             {
-                // Add uBlock Origin to Firefox if checked (Chrome doesn't support extension sideloading)
+                // Add uBlock Origin to Firefox if checked (Chrome doesn't support this method)
                 string sysdrive = System.Environment.ExpandEnvironmentVariables("%SYSTEMDRIVE%");
                 if (checkedListBoxApps.GetItemChecked(ffindex + 1))
-                    executeShellCommand(sysdrive + @"'\Program Files\Mozilla Firefox\firefox.exe' https://addons.mozilla.org/firefox/downloads/file/3719054/ublock_origin-1.33.2-an+fx.xpi");
+                    executeShellCommand(sysdrive + @"'\Program Files\Mozilla Firefox\firefox.exe' https://addons.mozilla.org/firefox/downloads/file/3933192/ublock_origin-1.42.4.xpi");
 
-                // Add IdontCareAboutCookies to Firefox if checked (Chrome doesn't support extension sideloading)
+                // Add IdontCareAboutCookies to Firefox if checked (Chrome doesn't support this method)
                 if (checkedListBoxApps.GetItemChecked(ffindex + 2))
-                    executeShellCommand(sysdrive + @"'\Program Files\Mozilla Firefox\firefox.exe' https://addons.mozilla.org/firefox/downloads/file/3707490/i_dont_care_about_cookies-3.2.7-an+fx.xpi"); ;
+                    executeShellCommand(sysdrive + @"'\Program Files\Mozilla Firefox\firefox.exe' https://addons.mozilla.org/firefox/downloads/file/3948477/i_dont_care_about_cookies-3.4.0.xpi"); ;
 
-                // Add Cookie AutoDelete to Firefox if checked (Chrome doesn't support extension sideloading)
+                // Add Cookie AutoDelete to Firefox if checked (Chrome doesn't support this method)
                 if (checkedListBoxApps.GetItemChecked(ffindex + 3))
-                    executeShellCommand(sysdrive + @"'\Program Files\Mozilla Firefox\firefox.exe' https://addons.mozilla.org/firefox/downloads/file/3711829/cookie_autodelete-3.6.0-an+fx.xpi");
+                    executeShellCommand(sysdrive + @"'\Program Files\Mozilla Firefox\firefox.exe' https://addons.mozilla.org/firefox/downloads/file/3952421/cookie_autodelete-3.7.0.xpi");
             }
         }
 
