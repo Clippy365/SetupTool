@@ -25,7 +25,7 @@ namespace SetupTool
         private bool checkedForFirefox = false;
 
         // This string array has to be in the same order as the elements in checkedListBoxSettings in order to show the correct ToolTip
-        private string[] ToolTipCaptions = { "Always turns on the NumLock key on your keyboard. Turned off by default", "Turn off certain settings like Windows telemetry, advertisements over Bluetooth or syncing clipboard contents via cloud. Turned on by default", "Only applies if you are logged in with an online account and turns off cloud synchronization of settings like Desktop background, etc. Turned on by default", "Disables ads in the Windows start menu. Turned on by default (except Windows 10 Enterprise)", "Turns off showing last used files and folder in file explorer. Turned on by default", "Installs and enables the Windows Subsystem for Linux version 2. Requires a reboot. Not installed by default", "Shows all file extensions (like *.pdf), no matter if the file extension is known or not. Turned off by default", "Always show all tray icons in the task bar. Turned off by default", "Uninstall apps like groove music or Candy Crush", "Uninstall OneDrive®" };
+        private string[] ToolTipCaptions = { "Always turns on the NumLock key on your keyboard. Turned off by default", "Turn off certain settings like Windows telemetry, advertisements over Bluetooth or syncing clipboard contents via cloud. Turned on by default", "Only applies if you are logged in with an online account and turns off cloud synchronization of settings like Desktop background, etc. Turned on by default", "Disables ads in the Windows start menu. Turned on by default (except Windows 10 Enterprise)", "Removes the weather widget from the task bar", "Turns off showing last used files and folder in file explorer. Turned on by default", "Installs and enables the Windows Subsystem for Linux version 2. Requires a reboot. Not installed by default", "Shows all file extensions (like *.pdf), no matter if the file extension is known or not. Turned off by default", "Always show all tray icons in the task bar. Turned off by default", "Uninstall apps like groove music or Candy Crush", "Uninstall OneDrive®" };
 
         public MainWindow()
         {
@@ -597,6 +597,10 @@ namespace SetupTool
             checkForFirefox();
         }
 
-        private void Disable_weather_widget_on_taskbar() => ImportRegFile("DisableWeatherWidgetOnTaskbar.reg");
+        public void Disable_weather_widget_on_taskbar()
+        {
+            ImportRegFile("DisableWeatherWidgetOnTaskbar.reg");
+        }
     }
 }
+ 
