@@ -101,6 +101,7 @@
             "Change privacy settings to strict",
             "Disable settings cloudsync",
             "Disable start menu ads",
+            "Disable weather widget on task bar",
             "Don\'t show last used files in file explorer",
             "Enable WSL2",
             "Show all file extensions",
