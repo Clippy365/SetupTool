@@ -596,10 +596,5 @@ namespace SetupTool
         {
             checkForFirefox();
         }
-
-        private void Disable_weather_widget_on_task_bar()
-        {
-            ImportRegFile()
-        }
     }
 }
