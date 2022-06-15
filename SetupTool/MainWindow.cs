@@ -27,10 +27,7 @@ namespace SetupTool
         // This string array has to be in the same order as the elements in checkedListBoxSettings in order to show the correct ToolTip
         private string[] ToolTipCaptions = { "Always turns on the NumLock key on your keyboard. Turned off by default", "Turn off certain settings like Windows telemetry, advertisements over Bluetooth or syncing clipboard contents via cloud. Turned on by default", "Only applies if you are logged in with an online account and turns off cloud synchronization of settings like Desktop background, etc. Turned on by default", "Disables ads in the Windows start menu. Turned on by default (except Windows 10 Enterprise)", "Removes the weather widget from the task bar", "Turns off showing last used files and folder in file explorer. Turned on by default", "Installs and enables the Windows Subsystem for Linux version 2. Requires a reboot. Not installed by default", "Shows all file extensions (like *.pdf), no matter if the file extension is known or not. Turned off by default", "Always show all tray icons in the task bar. Turned off by default", "Uninstall apps like groove music or Candy Crush", "Uninstall OneDrive®" };
 
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
+        public MainWindow() => InitializeComponent();
 
         private void Start_btn_Click(object sender, EventArgs e)
         {
@@ -58,10 +55,7 @@ namespace SetupTool
             }
         }
 
-        private void Exit_btn_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+        private void Exit_btn_Click(object sender, EventArgs e) => this.Close();
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -77,10 +71,7 @@ namespace SetupTool
 
         }
 
-        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+        private void ExitToolStripMenuItem_Click(object sender, EventArgs e) => this.Close();
 
         private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -449,53 +440,32 @@ namespace SetupTool
         /// <summary>
         /// For now this just changes a bunch of registry settings without any granularity. May be changed in the future
         /// </summary>
-        public void Change_privacy_settings_to_strict()
-        {
-            ImportRegFile("ChangePrivacySettingsToStrict.reg");
-        }
+        public void Change_privacy_settings_to_strict() => ImportRegFile("ChangePrivacySettingsToStrict.reg");
 
-        public void Disable_start_menu_ads()
-        {
-            ImportRegFile("DisableStartMenuAds.reg");
-        }
+        public void Disable_start_menu_ads() => ImportRegFile("DisableStartMenuAds.reg");
 
-        public void Dont_show_last_used_files_in_file_explorer()
-        {
-            ImportRegFile("DontShowLastFilesInExplorer.reg");
-        }
+        public void Dont_show_last_used_files_in_file_explorer() => ImportRegFile("DontShowLastFilesInExplorer.reg");
 
         /// <summary>
         /// Disables the sync of Windows Settings via cloud
         /// </summary>
-        public void Disable_settings_cloudsync()
-        {
-            ImportRegFile("DisableSettingsCloudsync.reg");
-        }
+        public void Disable_settings_cloudsync() => ImportRegFile("DisableSettingsCloudsync.reg");
 
 
         /// <summary>
         /// The Numlock key on the numblock of a keyboard will always be on if set
         /// </summary>
-        public void Always_turn_on_numlock()
-        {
-            ImportRegFile("AlwaysTurnOnNumlock.reg");
-        }
+        public void Always_turn_on_numlock() => ImportRegFile("AlwaysTurnOnNumlock.reg");
 
         /// <summary>
         /// Windows does hide file extensions for known filetypes by default. This setting will always show the file extension
         /// </summary>
-        public void Show_all_file_extensions()
-        {
-            ImportRegFile("ShowAllFileExtensions.reg");
-        }
+        public void Show_all_file_extensions() => ImportRegFile("ShowAllFileExtensions.reg");
             
         /// <summary>
         /// Windows does not show all tray icons by default. This setting will always show all tray icons
         /// </summary>
-        public void Show_all_tray_icons()
-        {
-            ImportRegFile("ShowAllTrayIcons.reg");
-        }
+        public void Show_all_tray_icons() => ImportRegFile("ShowAllTrayIcons.reg");
 
 
         /// <summary>
@@ -592,15 +562,10 @@ namespace SetupTool
             //checkForChromeOrFirefox();
         }
 
-        private void checkedListBoxApps_Click(object sender, EventArgs e)
-        {
-            checkForFirefox();
-        }
+        private void checkedListBoxApps_Click(object sender, EventArgs e) => checkForFirefox();
 
-        public void Disable_weather_widget_on_taskbar()
-        {
-            ImportRegFile("DisableWeatherWidgetOnTaskbar.reg");
-        }
+        public void Disable_weather_widget_on_taskbar() => ImportRegFile("DisableWeatherWidgetOnTaskbar.reg");
+        
     }
 }
  
